@@ -9,6 +9,7 @@ use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
 use App\Models\Activity;
 use App\Models\Course;
+use App\Models\Premise;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -29,7 +30,9 @@ class ActivityController extends Controller
 
         $users = User::get();
 
-        return view('admin.activities.index', compact('activities', 'courses', 'users'));
+        $premises = Premise::get();
+
+        return view('admin.activities.index', compact('activities', 'courses', 'users', 'premises'));
     }
 
     public function create()
@@ -40,7 +43,11 @@ class ActivityController extends Controller
 
         $moderators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.activities.create', compact('courses', 'moderators'));
+        $authors = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $premises = Premise::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.activities.create', compact('courses', 'moderators', 'authors', 'premises'));
     }
 
     public function store(StoreActivityRequest $request)
@@ -72,9 +79,13 @@ class ActivityController extends Controller
 
         $moderators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $activity->load('course', 'checkins', 'moderator');
+        $authors = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.activities.edit', compact('courses', 'checkins', 'moderators', 'activity'));
+        $premises = Premise::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $activity->load('course', 'checkins', 'moderator', 'author', 'premise');
+
+        return view('admin.activities.edit', compact('courses', 'checkins', 'moderators', 'authors', 'premises', 'activity'));
     }
 
     public function update(UpdateActivityRequest $request, Activity $activity)
@@ -121,7 +132,7 @@ class ActivityController extends Controller
     {
         abort_if(Gate::denies('activity_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $activity->load('course', 'checkins', 'moderator', 'activityQuestions');
+        $activity->load('course', 'checkins', 'moderator', 'author', 'premise', 'activityQuestions', 'activityScores');
 
         return view('admin.activities.show', compact('activity'));
     }

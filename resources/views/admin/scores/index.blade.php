@@ -25,6 +25,9 @@
                         {{ trans('cruds.score.fields.id') }}
                     </th>
                     <th>
+                        {{ trans('cruds.score.fields.activity') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.score.fields.value') }}
                     </th>
                     <th>
@@ -42,6 +45,14 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($activities as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -118,6 +129,7 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
+{ data: 'activity_name', name: 'activity.name' },
 { data: 'value', name: 'value' },
 { data: 'author_name', name: 'author.name' },
 { data: 'user_name', name: 'user.name' },

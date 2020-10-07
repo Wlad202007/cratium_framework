@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\CsvImportTrait;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyUnitRequest;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
@@ -11,12 +12,13 @@ use App\Models\Unit;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
 class UnitController extends Controller
 {
-    use CsvImportTrait;
+    use MediaUploadingTrait, CsvImportTrait;
 
     public function index(Request $request)
     {
@@ -53,24 +55,11 @@ class UnitController extends Controller
             $table->editColumn('type', function ($row) {
                 return $row->type ? Unit::TYPE_SELECT[$row->type] : '';
             });
-            $table->editColumn('managers', function ($row) {
-                $labels = [];
-
-                foreach ($row->managers as $manager) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $manager->name);
-                }
-
-                return implode(' ', $labels);
-            });
             $table->addColumn('head_name', function ($row) {
                 return $row->head ? $row->head->name : '';
             });
 
-            $table->addColumn('parent_name', function ($row) {
-                return $row->parent ? $row->parent->name : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'managers', 'head', 'parent']);
+            $table->rawColumns(['actions', 'placeholder', 'head']);
 
             return $table->make(true);
         }
@@ -99,6 +88,10 @@ class UnitController extends Controller
     {
         $unit = Unit::create($request->all());
         $unit->managers()->sync($request->input('managers', []));
+
+        if ($media = $request->input('ck-media', false)) {
+            Media::whereIn('id', $media)->update(['model_id' => $unit->id]);
+        }
 
         return redirect()->route('admin.units.index');
     }
@@ -130,7 +123,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $unit->load('managers', 'head', 'parent', 'unitPremises', 'unitGroups', 'unitDocuments', 'parentUnits', 'unitsTemplates');
+        $unit->load('managers', 'head', 'parent', 'unitPremises', 'unitGroups', 'unitDocuments', 'parentUnits', 'unitBills', 'unitsTemplates');
 
         return view('admin.units.show', compact('unit'));
     }
@@ -149,5 +142,17 @@ class UnitController extends Controller
         Unit::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function storeCKEditorImages(Request $request)
+    {
+        abort_if(Gate::denies('unit_create') && Gate::denies('unit_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $model         = new Unit();
+        $model->id     = $request->input('crud_id', 0);
+        $model->exists = true;
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+
+        return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
 }

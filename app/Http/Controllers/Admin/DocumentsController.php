@@ -60,19 +60,6 @@ class DocumentsController extends Controller
             $table->editColumn('title', function ($row) {
                 return $row->title ? $row->title : "";
             });
-            $table->editColumn('scan', function ($row) {
-                if (!$row->scan) {
-                    return '';
-                }
-
-                $links = [];
-
-                foreach ($row->scan as $media) {
-                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>';
-                }
-
-                return implode(', ', $links);
-            });
             $table->addColumn('unit_name', function ($row) {
                 return $row->unit ? $row->unit->name : '';
             });
@@ -87,26 +74,8 @@ class DocumentsController extends Controller
             $table->editColumn('status', function ($row) {
                 return $row->status ? Document::STATUS_SELECT[$row->status] : '';
             });
-            $table->editColumn('shares', function ($row) {
-                $labels = [];
 
-                foreach ($row->shares as $share) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $share->name);
-                }
-
-                return implode(' ', $labels);
-            });
-            $table->editColumn('folders', function ($row) {
-                $labels = [];
-
-                foreach ($row->folders as $folder) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $folder->name);
-                }
-
-                return implode(' ', $labels);
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'scan', 'unit', 'author', 'shares', 'folders']);
+            $table->rawColumns(['actions', 'placeholder', 'unit', 'author']);
 
             return $table->make(true);
         }

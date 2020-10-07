@@ -14,18 +14,62 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class SignatureController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('signature_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $signatures = Signature::all();
+        if ($request->ajax()) {
+            $query = Signature::with(['user', 'document'])->select(sprintf('%s.*', (new Signature)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.signatures.index', compact('signatures'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'signature_show';
+                $editGate      = 'signature_edit';
+                $deleteGate    = 'signature_delete';
+                $crudRoutePart = 'signatures';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('user_name', function ($row) {
+                return $row->user ? $row->user->name : '';
+            });
+
+            $table->addColumn('document_int_number', function ($row) {
+                return $row->document ? $row->document->int_number : '';
+            });
+
+            $table->editColumn('status', function ($row) {
+                return $row->status ? Signature::STATUS_SELECT[$row->status] : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'user', 'document']);
+
+            return $table->make(true);
+        }
+
+        $users     = User::get();
+        $documents = Document::get();
+
+        return view('admin.signatures.index', compact('users', 'documents'));
     }
 
     public function create()

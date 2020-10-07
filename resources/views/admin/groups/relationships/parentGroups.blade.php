@@ -34,10 +34,10 @@
                             {{ trans('cruds.group.fields.members') }}
                         </th>
                         <th>
-                            {{ trans('cruds.group.fields.parent') }}
+                            {{ trans('cruds.group.fields.head') }}
                         </th>
                         <th>
-                            {{ trans('cruds.group.fields.head') }}
+                            {{ trans('cruds.group.fields.parent') }}
                         </th>
                         <th>
                             &nbsp;
@@ -65,10 +65,10 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{ $group->parent->name ?? '' }}
+                                {{ $group->head->name ?? '' }}
                             </td>
                             <td>
-                                {{ $group->head->name ?? '' }}
+                                {{ $group->parent->name ?? '' }}
                             </td>
                             <td>
                                 @can('group_show')

@@ -28,19 +28,19 @@
                             {{ trans('cruds.question.fields.question') }}
                         </th>
                         <th>
-                            {{ trans('cruds.question.fields.files') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.question.fields.score') }}
                         </th>
                         <th>
                             {{ trans('cruds.question.fields.activity') }}
                         </th>
                         <th>
-                            {{ trans('cruds.question.fields.status') }}
+                            {{ trans('cruds.question.fields.priority') }}
                         </th>
                         <th>
                             {{ trans('cruds.question.fields.type') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.question.fields.status') }}
                         </th>
                         <th>
                             &nbsp;
@@ -60,23 +60,19 @@
                                 {{ $question->question ?? '' }}
                             </td>
                             <td>
-                                @foreach($question->files as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
                                 {{ $question->score ?? '' }}
                             </td>
                             <td>
                                 {{ $question->activity->name ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Question::STATUS_SELECT[$question->status] ?? '' }}
+                                {{ $question->priority ?? '' }}
                             </td>
                             <td>
                                 {{ App\Models\Question::TYPE_SELECT[$question->type] ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Question::STATUS_SELECT[$question->status] ?? '' }}
                             </td>
                             <td>
                                 @can('question_show')
@@ -147,7 +143,7 @@
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 10,
   });
   let table = $('.datatable-activityQuestions:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){

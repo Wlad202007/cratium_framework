@@ -32,23 +32,65 @@
                         {{ trans('cruds.question.fields.question') }}
                     </th>
                     <th>
-                        {{ trans('cruds.question.fields.files') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.question.fields.score') }}
                     </th>
                     <th>
                         {{ trans('cruds.question.fields.activity') }}
                     </th>
                     <th>
-                        {{ trans('cruds.question.fields.status') }}
+                        {{ trans('cruds.question.fields.priority') }}
                     </th>
                     <th>
                         {{ trans('cruds.question.fields.type') }}
                     </th>
                     <th>
+                        {{ trans('cruds.question.fields.status') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($activities as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Question::TYPE_SELECT as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Question::STATUS_SELECT as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                    </td>
                 </tr>
             </thead>
         </table>
@@ -104,23 +146,30 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'question', name: 'question' },
-{ data: 'files', name: 'files', sortable: false, searchable: false },
 { data: 'score', name: 'score' },
 { data: 'activity_name', name: 'activity.name' },
-{ data: 'status', name: 'status' },
+{ data: 'priority', name: 'priority' },
 { data: 'type', name: 'type' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 10,
   };
   let table = $('.datatable-Question').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+  $('.datatable thead').on('input', '.search', function () {
+      let strict = $(this).attr('strict') || false
+      let value = strict && this.value ? "^" + this.value + "$" : this.value
+      table
+        .column($(this).parent().index())
+        .search(value, strict)
+        .draw()
+  });
 });
 
 </script>

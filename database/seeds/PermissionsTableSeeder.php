@@ -390,6 +390,74 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 96,
+                'title' => 'publication_create',
+            ],
+            [
+                'id'    => 97,
+                'title' => 'publication_edit',
+            ],
+            [
+                'id'    => 98,
+                'title' => 'publication_show',
+            ],
+            [
+                'id'    => 99,
+                'title' => 'publication_delete',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'publication_access',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'examination_access',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'system_access',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'config_create',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'config_edit',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'config_show',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'config_delete',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'config_access',
+            ],
+            [
+                'id'    => 108,
+                'title' => 'bill_create',
+            ],
+            [
+                'id'    => 109,
+                'title' => 'bill_edit',
+            ],
+            [
+                'id'    => 110,
+                'title' => 'bill_show',
+            ],
+            [
+                'id'    => 111,
+                'title' => 'bill_delete',
+            ],
+            [
+                'id'    => 112,
+                'title' => 'bill_access',
+            ],
+            [
+                'id'    => 113,
                 'title' => 'profile_password_edit',
             ],
         ];

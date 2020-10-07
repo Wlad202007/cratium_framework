@@ -34,9 +34,6 @@
                             {{ trans('cruds.document.fields.title') }}
                         </th>
                         <th>
-                            {{ trans('cruds.document.fields.scan') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.document.fields.unit') }}
                         </th>
                         <th>
@@ -47,12 +44,6 @@
                         </th>
                         <th>
                             {{ trans('cruds.document.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.document.fields.shares') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.document.fields.folders') }}
                         </th>
                         <th>
                             &nbsp;
@@ -78,13 +69,6 @@
                                 {{ $document->title ?? '' }}
                             </td>
                             <td>
-                                @foreach($document->scan as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
                                 {{ $document->unit->name ?? '' }}
                             </td>
                             <td>
@@ -95,16 +79,6 @@
                             </td>
                             <td>
                                 {{ App\Models\Document::STATUS_SELECT[$document->status] ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($document->shares as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($document->folders as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
                             </td>
                             <td>
                                 @can('document_show')

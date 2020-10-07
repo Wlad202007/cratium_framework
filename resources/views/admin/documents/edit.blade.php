@@ -156,6 +156,16 @@
                 <span class="help-block">{{ trans('cruds.document.fields.folders_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="cost">{{ trans('cruds.document.fields.cost') }}</label>
+                <input class="form-control {{ $errors->has('cost') ? 'is-invalid' : '' }}" type="number" name="cost" id="cost" value="{{ old('cost', $document->cost) }}" step="0.01">
+                @if($errors->has('cost'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('cost') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.document.fields.cost_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

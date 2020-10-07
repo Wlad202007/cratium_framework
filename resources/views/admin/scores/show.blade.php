@@ -25,26 +25,18 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.score.fields.activity') }}
+                        </th>
+                        <td>
+                            {{ $score->activity->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.score.fields.value') }}
                         </th>
                         <td>
                             {{ $score->value }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.score.fields.model') }}
-                        </th>
-                        <td>
-                            {{ $score->model }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.score.fields.model_type') }}
-                        </th>
-                        <td>
-                            {{ $score->model_type }}
                         </td>
                     </tr>
                     <tr>

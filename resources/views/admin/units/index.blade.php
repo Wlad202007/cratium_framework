@@ -35,13 +35,7 @@
                         {{ trans('cruds.unit.fields.type') }}
                     </th>
                     <th>
-                        {{ trans('cruds.unit.fields.managers') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.unit.fields.head') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.unit.fields.parent') }}
                     </th>
                     <th>
                         &nbsp;
@@ -68,22 +62,6 @@
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($units as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -146,9 +124,7 @@
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
 { data: 'type', name: 'type' },
-{ data: 'managers', name: 'managers.name' },
 { data: 'head_name', name: 'head.name' },
-{ data: 'parent_name', name: 'parent.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

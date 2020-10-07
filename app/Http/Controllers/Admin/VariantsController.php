@@ -53,27 +53,14 @@ class VariantsController extends Controller
                 return $row->question ? $row->question->question : '';
             });
 
-            $table->editColumn('image', function ($row) {
-                if ($photo = $row->image) {
-                    return sprintf(
-                        '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
-                        $photo->url,
-                        $photo->thumbnail
-                    );
-                }
-
-                return '';
-            });
-            $table->editColumn('type', function ($row) {
-                return $row->type ? Variant::TYPE_SELECT[$row->type] : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'question', 'image']);
+            $table->rawColumns(['actions', 'placeholder', 'question']);
 
             return $table->make(true);
         }
 
-        return view('admin.variants.index');
+        $questions = Question::get();
+
+        return view('admin.variants.index', compact('questions'));
     }
 
     public function create()

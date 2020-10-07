@@ -69,10 +69,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.question.fields.status') }}
+                            {{ trans('cruds.question.fields.priority') }}
                         </th>
                         <td>
-                            {{ App\Models\Question::STATUS_SELECT[$question->status] ?? '' }}
+                            {{ $question->priority }}
                         </td>
                     </tr>
                     <tr>
@@ -81,6 +81,14 @@
                         </th>
                         <td>
                             {{ App\Models\Question::TYPE_SELECT[$question->type] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.question.fields.status') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Question::STATUS_SELECT[$question->status] ?? '' }}
                         </td>
                     </tr>
                 </tbody>
