@@ -32,6 +32,10 @@ class StoreQuestionRequest extends FormRequest
             'status'      => [
                 'required',
             ],
+            'priority'    => [
+                'string',
+                'required',
+            ],
             'type'        => [
                 'required',
             ],

@@ -28,16 +28,13 @@
                             {{ trans('cruds.folder.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.folder.fields.color') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.folder.fields.users') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.folder.fields.groups') }}
                         </th>
                         <th>
                             {{ trans('cruds.folder.fields.admin') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.folder.fields.parent') }}
                         </th>
                         <th>
                             &nbsp;
@@ -57,20 +54,15 @@
                                 {{ $folder->name ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Folder::COLOR_SELECT[$folder->color] ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($folder->users as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
                                 @foreach($folder->groups as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
                             </td>
                             <td>
                                 {{ $folder->admin->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $folder->parent->name ?? '' }}
                             </td>
                             <td>
                                 @can('folder_show')

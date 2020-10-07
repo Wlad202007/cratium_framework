@@ -53,6 +53,7 @@ class Document extends Model implements HasMedia
         'author_id',
         'type',
         'status',
+        'cost',
         'created_at',
         'updated_at',
         'deleted_at',

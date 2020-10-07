@@ -53,24 +53,11 @@ class UnitController extends Controller
             $table->editColumn('type', function ($row) {
                 return $row->type ? Unit::TYPE_SELECT[$row->type] : '';
             });
-            $table->editColumn('managers', function ($row) {
-                $labels = [];
-
-                foreach ($row->managers as $manager) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $manager->name);
-                }
-
-                return implode(' ', $labels);
-            });
             $table->addColumn('head_name', function ($row) {
                 return $row->head ? $row->head->name : '';
             });
 
-            $table->addColumn('parent_name', function ($row) {
-                return $row->parent ? $row->parent->name : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'managers', 'head', 'parent']);
+            $table->rawColumns(['actions', 'placeholder', 'head']);
 
             return $table->make(true);
         }

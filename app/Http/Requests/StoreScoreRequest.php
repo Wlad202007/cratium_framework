@@ -17,27 +17,21 @@ class StoreScoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'value'      => [
+            'value'       => [
                 'required',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
             ],
-            'model'      => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
-            'model_type' => [
-                'string',
-                'nullable',
-            ],
-            'author_id'  => [
+            'author_id'   => [
                 'required',
                 'integer',
             ],
-            'user_id'    => [
+            'user_id'     => [
+                'required',
+                'integer',
+            ],
+            'activity_id' => [
                 'required',
                 'integer',
             ],

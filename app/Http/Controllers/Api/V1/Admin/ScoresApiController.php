@@ -17,7 +17,7 @@ class ScoresApiController extends Controller
     {
         abort_if(Gate::denies('score_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ScoreResource(Score::with(['author', 'user'])->get());
+        return new ScoreResource(Score::with(['activity', 'author', 'user'])->get());
     }
 
     public function store(StoreScoreRequest $request)
@@ -33,7 +33,7 @@ class ScoresApiController extends Controller
     {
         abort_if(Gate::denies('score_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ScoreResource($score->load(['author', 'user']));
+        return new ScoreResource($score->load(['activity', 'author', 'user']));
     }
 
     public function update(UpdateScoreRequest $request, Score $score)

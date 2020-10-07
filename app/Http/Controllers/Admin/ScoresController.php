@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyScoreRequest;
 use App\Http\Requests\StoreScoreRequest;
 use App\Http\Requests\UpdateScoreRequest;
+use App\Models\Activity;
 use App\Models\Score;
 use App\Models\User;
 use Gate;
@@ -20,7 +21,7 @@ class ScoresController extends Controller
         abort_if(Gate::denies('score_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Score::with(['author', 'user'])->select(sprintf('%s.*', (new Score)->table));
+            $query = Score::with(['author', 'user', 'activity'])->select(sprintf('%s.*', (new Score)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -55,15 +56,20 @@ class ScoresController extends Controller
                 return $row->user ? $row->user->name : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'author', 'user']);
+            $table->addColumn('activity_name', function ($row) {
+                return $row->activity ? $row->activity->name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'author', 'user', 'activity']);
 
             return $table->make(true);
         }
 
-        $users = User::get();
-        $users = User::get();
+        $users      = User::get();
+        $users      = User::get();
+        $activities = Activity::get();
 
-        return view('admin.scores.index', compact('users', 'users'));
+        return view('admin.scores.index', compact('users', 'users', 'activities'));
     }
 
     public function create()
@@ -74,7 +80,9 @@ class ScoresController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.scores.create', compact('authors', 'users'));
+        $activities = Activity::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.scores.create', compact('authors', 'users', 'activities'));
     }
 
     public function store(StoreScoreRequest $request)
@@ -92,9 +100,11 @@ class ScoresController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $score->load('author', 'user');
+        $activities = Activity::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.scores.edit', compact('authors', 'users', 'score'));
+        $score->load('author', 'user', 'activity');
+
+        return view('admin.scores.edit', compact('authors', 'users', 'activities', 'score'));
     }
 
     public function update(UpdateScoreRequest $request, Score $score)
@@ -108,7 +118,7 @@ class ScoresController extends Controller
     {
         abort_if(Gate::denies('score_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $score->load('author', 'user');
+        $score->load('author', 'user', 'activity');
 
         return view('admin.scores.show', compact('score'));
     }

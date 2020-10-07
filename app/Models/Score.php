@@ -21,10 +21,9 @@ class Score extends Model
 
     protected $fillable = [
         'value',
-        'model',
-        'model_type',
         'author_id',
         'user_id',
+        'activity_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -43,5 +42,10 @@ class Score extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class, 'activity_id');
     }
 }

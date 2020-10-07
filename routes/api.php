@@ -64,4 +64,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Scores
     Route::apiResource('scores', 'ScoresApiController');
+
+    // Publications
+    Route::post('publications/media', 'PublicationsApiController@storeMedia')->name('publications.storeMedia');
+    Route::apiResource('publications', 'PublicationsApiController');
 });

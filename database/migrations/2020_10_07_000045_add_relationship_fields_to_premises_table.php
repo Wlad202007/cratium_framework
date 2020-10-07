@@ -13,6 +13,8 @@ class AddRelationshipFieldsToPremisesTable extends Migration
             $table->foreign('unit_id', 'unit_fk_2342018')->references('id')->on('units');
             $table->unsignedInteger('team_id')->nullable();
             $table->foreign('team_id', 'team_fk_2342022')->references('id')->on('teams');
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->foreign('parent_id', 'parent_fk_2343744')->references('id')->on('premises');
         });
     }
 }

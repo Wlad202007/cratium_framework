@@ -33,6 +33,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <td>
+                            {{ $user->last_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.middle_name') }}
+                        </th>
+                        <td>
+                            {{ $user->middle_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.user.fields.degree') }}
                         </th>
                         <td>
@@ -49,6 +65,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.position') }}
+                        </th>
+                        <td>
+                            {{ $user->position }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.user.fields.approved') }}
                         </th>
                         <td>
@@ -61,14 +85,6 @@
                         </th>
                         <td>
                             <input type="checkbox" disabled="disabled" {{ $user->verified ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.position') }}
-                        </th>
-                        <td>
-                            {{ $user->position }}
                         </td>
                     </tr>
                     <tr>
@@ -172,6 +188,16 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#author_publications" role="tab" data-toggle="tab">
+                {{ trans('cruds.publication.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#author_activities" role="tab" data-toggle="tab">
+                {{ trans('cruds.activity.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#managers_units" role="tab" data-toggle="tab">
                 {{ trans('cruds.unit.title') }}
             </a>
@@ -232,6 +258,12 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="user_scores">
             @includeIf('admin.users.relationships.userScores', ['scores' => $user->userScores])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="author_publications">
+            @includeIf('admin.users.relationships.authorPublications', ['publications' => $user->authorPublications])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="author_activities">
+            @includeIf('admin.users.relationships.authorActivities', ['activities' => $user->authorActivities])
         </div>
         <div class="tab-pane" role="tabpanel" id="managers_units">
             @includeIf('admin.users.relationships.managersUnits', ['units' => $user->managersUnits])

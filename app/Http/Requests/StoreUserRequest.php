@@ -21,6 +21,14 @@ class StoreUserRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'last_name'       => [
+                'string',
+                'nullable',
+            ],
+            'middle_name'     => [
+                'string',
+                'nullable',
+            ],
             'academic_status' => [
                 'string',
                 'nullable',

@@ -94,7 +94,7 @@
                     @can('unit_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.units.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/units") || request()->is("admin/units/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-cube c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.unit.title') }}
@@ -104,7 +104,7 @@
                     @can('premise_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.premises.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/premises") || request()->is("admin/premises/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-hotel c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-hospital-alt c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.premise.title') }}
@@ -141,6 +141,28 @@
                             </a>
                         </li>
                     @endcan
+                    @can('publication_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.publications.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/publications") || request()->is("admin/publications/*") ? "active" : "" }}">
+                                <i class="fa-fw fas fa-bookmark c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.publication.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('examination_access')
+            <li class="c-sidebar-nav-dropdown">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-award c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.examination.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
                     @can('question_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.questions.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/questions") || request()->is("admin/questions/*") ? "active" : "" }}">
@@ -154,7 +176,7 @@
                     @can('variant_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.variants.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/variants") || request()->is("admin/variants/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-arrows-alt c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-list c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.variant.title') }}

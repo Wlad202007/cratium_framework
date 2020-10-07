@@ -31,13 +31,7 @@
                             {{ trans('cruds.unit.fields.type') }}
                         </th>
                         <th>
-                            {{ trans('cruds.unit.fields.managers') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.unit.fields.head') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.unit.fields.parent') }}
                         </th>
                         <th>
                             &nbsp;
@@ -60,15 +54,7 @@
                                 {{ App\Models\Unit::TYPE_SELECT[$unit->type] ?? '' }}
                             </td>
                             <td>
-                                @foreach($unit->managers as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
                                 {{ $unit->head->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $unit->parent->name ?? '' }}
                             </td>
                             <td>
                                 @can('unit_show')

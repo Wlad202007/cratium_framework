@@ -43,12 +43,6 @@
                             {{ trans('cruds.activity.fields.time_end') }}
                         </th>
                         <th>
-                            {{ trans('cruds.activity.fields.test_per_page') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.activity.fields.time_per_test') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.activity.fields.mode') }}
                         </th>
                         <th>
@@ -56,6 +50,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.activity.fields.moderator') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.activity.fields.premise') }}
                         </th>
                         <th>
                             &nbsp;
@@ -90,12 +87,6 @@
                                 {{ $activity->time_end ?? '' }}
                             </td>
                             <td>
-                                {{ $activity->test_per_page ?? '' }}
-                            </td>
-                            <td>
-                                {{ $activity->time_per_test ?? '' }}
-                            </td>
-                            <td>
                                 {{ App\Models\Activity::MODE_SELECT[$activity->mode] ?? '' }}
                             </td>
                             <td>
@@ -103,6 +94,9 @@
                             </td>
                             <td>
                                 {{ $activity->moderator->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $activity->premise->name ?? '' }}
                             </td>
                             <td>
                                 @can('activity_show')

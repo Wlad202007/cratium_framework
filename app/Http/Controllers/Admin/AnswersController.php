@@ -58,11 +58,7 @@ class AnswersController extends Controller
                 return $row->variant ? $row->variant->type : '';
             });
 
-            $table->editColumn('media', function ($row) {
-                return $row->media ? '<a href="' . $row->media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>' : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'user', 'variant', 'media']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'variant']);
 
             return $table->make(true);
         }

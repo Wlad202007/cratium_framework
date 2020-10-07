@@ -65,19 +65,14 @@
                 <span class="help-block">{{ trans('cruds.question.fields.activity_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required">{{ trans('cruds.question.fields.status') }}</label>
-                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
-                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\Question::STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('status', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('status'))
+                <label class="required" for="priority">{{ trans('cruds.question.fields.priority') }}</label>
+                <input class="form-control {{ $errors->has('priority') ? 'is-invalid' : '' }}" type="text" name="priority" id="priority" value="{{ old('priority', '1') }}" required>
+                @if($errors->has('priority'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('status') }}
+                        {{ $errors->first('priority') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.question.fields.status_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.question.fields.priority_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required">{{ trans('cruds.question.fields.type') }}</label>
@@ -93,6 +88,21 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.question.fields.type_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required">{{ trans('cruds.question.fields.status') }}</label>
+                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
+                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Question::STATUS_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('status', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('status'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('status') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.question.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

@@ -30,6 +30,7 @@ class Group extends Model implements HasMedia
         'unit_id',
         'description',
         'head_id',
+        'parent_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -44,6 +45,11 @@ class Group extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+    public function parentGroups()
+    {
+        return $this->hasMany(Group::class, 'parent_id', 'id');
     }
 
     public function groupsCourses()
@@ -69,5 +75,10 @@ class Group extends Model implements HasMedia
     public function head()
     {
         return $this->belongsTo(User::class, 'head_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Group::class, 'parent_id');
     }
 }

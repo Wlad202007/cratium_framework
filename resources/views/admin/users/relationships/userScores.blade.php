@@ -25,6 +25,9 @@
                             {{ trans('cruds.score.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.score.fields.activity') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.score.fields.value') }}
                         </th>
                         <th>
@@ -46,6 +49,9 @@
                             </td>
                             <td>
                                 {{ $score->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $score->activity->name ?? '' }}
                             </td>
                             <td>
                                 {{ $score->value ?? '' }}
