@@ -60,6 +60,16 @@ class Unit extends Model
         return $this->hasMany(Group::class, 'unit_id', 'id');
     }
 
+    public function unitDocuments()
+    {
+        return $this->hasMany(Document::class, 'unit_id', 'id');
+    }
+
+    public function unitsTemplates()
+    {
+        return $this->belongsToMany(Template::class);
+    }
+
     public function managers()
     {
         return $this->belongsToMany(User::class);

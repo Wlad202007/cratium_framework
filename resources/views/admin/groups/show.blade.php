@@ -99,6 +99,11 @@
                 {{ trans('cruds.course.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#groups_folders" role="tab" data-toggle="tab">
+                {{ trans('cruds.folder.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="parent_groups">
@@ -106,6 +111,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="groups_courses">
             @includeIf('admin.groups.relationships.groupsCourses', ['courses' => $group->groupsCourses])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="groups_folders">
+            @includeIf('admin.groups.relationships.groupsFolders', ['folders' => $group->groupsFolders])
         </div>
     </div>
 </div>

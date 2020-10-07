@@ -21,6 +21,51 @@
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label>{{ trans('cruds.user.fields.degree') }}</label>
+                <select class="form-control {{ $errors->has('degree') ? 'is-invalid' : '' }}" name="degree" id="degree">
+                    <option value disabled {{ old('degree', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\User::DEGREE_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('degree', $user->degree) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('degree'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('degree') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.degree_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="academic_status">{{ trans('cruds.user.fields.academic_status') }}</label>
+                <input class="form-control {{ $errors->has('academic_status') ? 'is-invalid' : '' }}" type="text" name="academic_status" id="academic_status" value="{{ old('academic_status', $user->academic_status) }}">
+                @if($errors->has('academic_status'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('academic_status') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.academic_status_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="position">{{ trans('cruds.user.fields.position') }}</label>
+                <input class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" type="text" name="position" id="position" value="{{ old('position', $user->position) }}">
+                @if($errors->has('position'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('position') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.position_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="phone">{{ trans('cruds.user.fields.phone') }}</label>
+                <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}">
+                @if($errors->has('phone'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('phone') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.phone_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required>
                 @if($errors->has('email'))

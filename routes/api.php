@@ -42,4 +42,26 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Answers
     Route::post('answers/media', 'AnswersApiController@storeMedia')->name('answers.storeMedia');
     Route::apiResource('answers', 'AnswersApiController');
+
+    // Documents
+    Route::post('documents/media', 'DocumentsApiController@storeMedia')->name('documents.storeMedia');
+    Route::apiResource('documents', 'DocumentsApiController');
+
+    // Reviews
+    Route::post('reviews/media', 'ReviewsApiController@storeMedia')->name('reviews.storeMedia');
+    Route::apiResource('reviews', 'ReviewsApiController');
+
+    // Folders
+    Route::apiResource('folders', 'FoldersApiController');
+
+    // Signatures
+    Route::post('signatures/media', 'SignatureApiController@storeMedia')->name('signatures.storeMedia');
+    Route::apiResource('signatures', 'SignatureApiController');
+
+    // Templates
+    Route::post('templates/media', 'TemplateApiController@storeMedia')->name('templates.storeMedia');
+    Route::apiResource('templates', 'TemplateApiController');
+
+    // Scores
+    Route::apiResource('scores', 'ScoresApiController');
 });

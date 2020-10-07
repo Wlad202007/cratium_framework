@@ -130,7 +130,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $unit->load('managers', 'head', 'parent', 'parentUnits', 'unitPremises', 'unitGroups');
+        $unit->load('managers', 'head', 'parent', 'parentUnits', 'unitPremises', 'unitGroups', 'unitDocuments', 'unitsTemplates');
 
         return view('admin.units.show', compact('unit'));
     }
