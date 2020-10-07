@@ -34,9 +34,6 @@
                             {{ trans('cruds.group.fields.members') }}
                         </th>
                         <th>
-                            {{ trans('cruds.group.fields.parent') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.group.fields.head') }}
                         </th>
                         <th>
@@ -63,9 +60,6 @@
                                 @foreach($group->members as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $group->parent->name ?? '' }}
                             </td>
                             <td>
                                 {{ $group->head->name ?? '' }}

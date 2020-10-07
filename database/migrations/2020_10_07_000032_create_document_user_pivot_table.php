@@ -10,9 +10,9 @@ class CreateDocumentUserPivotTable extends Migration
     {
         Schema::create('document_user', function (Blueprint $table) {
             $table->unsignedInteger('document_id');
-            $table->foreign('document_id', 'document_id_fk_2341353')->references('id')->on('documents')->onDelete('cascade');
+            $table->foreign('document_id', 'document_id_fk_2342115')->references('id')->on('documents')->onDelete('cascade');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_id_fk_2341353')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id', 'user_id_fk_2342115')->references('id')->on('users')->onDelete('cascade');
         });
     }
 }

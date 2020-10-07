@@ -17,7 +17,7 @@ class FoldersApiController extends Controller
     {
         abort_if(Gate::denies('folder_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new FolderResource(Folder::with(['users', 'groups', 'parent', 'admin'])->get());
+        return new FolderResource(Folder::with(['users', 'groups', 'admin'])->get());
     }
 
     public function store(StoreFolderRequest $request)
@@ -35,7 +35,7 @@ class FoldersApiController extends Controller
     {
         abort_if(Gate::denies('folder_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new FolderResource($folder->load(['users', 'groups', 'parent', 'admin']));
+        return new FolderResource($folder->load(['users', 'groups', 'admin']));
     }
 
     public function update(UpdateFolderRequest $request, Folder $folder)

@@ -10,7 +10,6 @@ Route::get('/home', function () {
 });
 
 Auth::routes();
-Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 // Admin
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
@@ -26,6 +25,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
+
+    // Audit Logs
+    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     // Teams
     Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
@@ -43,17 +45,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('premises/process-csv-import', 'PremiseController@processCsvImport')->name('premises.processCsvImport');
     Route::resource('premises', 'PremiseController');
 
-    // Courses
-    Route::delete('courses/destroy', 'CourseController@massDestroy')->name('courses.massDestroy');
-    Route::post('courses/media', 'CourseController@storeMedia')->name('courses.storeMedia');
-    Route::post('courses/ckmedia', 'CourseController@storeCKEditorImages')->name('courses.storeCKEditorImages');
-    Route::resource('courses', 'CourseController');
-
     // Groups
     Route::delete('groups/destroy', 'GroupsController@massDestroy')->name('groups.massDestroy');
     Route::post('groups/media', 'GroupsController@storeMedia')->name('groups.storeMedia');
     Route::post('groups/ckmedia', 'GroupsController@storeCKEditorImages')->name('groups.storeCKEditorImages');
     Route::resource('groups', 'GroupsController');
+
+    // Courses
+    Route::delete('courses/destroy', 'CourseController@massDestroy')->name('courses.massDestroy');
+    Route::post('courses/media', 'CourseController@storeMedia')->name('courses.storeMedia');
+    Route::post('courses/ckmedia', 'CourseController@storeCKEditorImages')->name('courses.storeCKEditorImages');
+    Route::resource('courses', 'CourseController');
 
     // Activities
     Route::delete('activities/destroy', 'ActivityController@massDestroy')->name('activities.massDestroy');
@@ -85,6 +87,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('answers/process-csv-import', 'AnswersController@processCsvImport')->name('answers.processCsvImport');
     Route::resource('answers', 'AnswersController');
 
+    // Folders
+    Route::delete('folders/destroy', 'FoldersController@massDestroy')->name('folders.massDestroy');
+    Route::resource('folders', 'FoldersController');
+
     // Documents
     Route::delete('documents/destroy', 'DocumentsController@massDestroy')->name('documents.massDestroy');
     Route::post('documents/media', 'DocumentsController@storeMedia')->name('documents.storeMedia');
@@ -98,10 +104,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('reviews/media', 'ReviewsController@storeMedia')->name('reviews.storeMedia');
     Route::post('reviews/ckmedia', 'ReviewsController@storeCKEditorImages')->name('reviews.storeCKEditorImages');
     Route::resource('reviews', 'ReviewsController');
-
-    // Folders
-    Route::delete('folders/destroy', 'FoldersController@massDestroy')->name('folders.massDestroy');
-    Route::resource('folders', 'FoldersController');
 
     // Signatures
     Route::delete('signatures/destroy', 'SignatureController@massDestroy')->name('signatures.massDestroy');
@@ -120,9 +122,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Scores
     Route::delete('scores/destroy', 'ScoresController@massDestroy')->name('scores.massDestroy');
     Route::resource('scores', 'ScoresController');
-
-    // Audit Logs
-    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');

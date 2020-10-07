@@ -10,9 +10,9 @@ class CreateGroupUserPivotTable extends Migration
     {
         Schema::create('group_user', function (Blueprint $table) {
             $table->unsignedInteger('group_id');
-            $table->foreign('group_id', 'group_id_fk_2340934')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('group_id', 'group_id_fk_2342027')->references('id')->on('groups')->onDelete('cascade');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_id_fk_2340934')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id', 'user_id_fk_2342027')->references('id')->on('users')->onDelete('cascade');
         });
     }
 }

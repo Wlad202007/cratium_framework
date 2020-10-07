@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Traits\MultiTenantModelTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
 
 class Premise extends Model
 {
-    use SoftDeletes, MultiTenantModelTrait, HasFactory;
+    use SoftDeletes, MultiTenantModelTrait;
 
     public $table = 'premises';
 
@@ -38,7 +37,6 @@ class Premise extends Model
         'address',
         'gps',
         'created_at',
-        'parent_id',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -49,19 +47,9 @@ class Premise extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function parentPremises()
-    {
-        return $this->hasMany(Premise::class, 'parent_id', 'id');
-    }
-
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(Premise::class, 'parent_id');
     }
 
     public function team()

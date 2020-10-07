@@ -10,9 +10,9 @@ class AddRelationshipFieldsToReviewsTable extends Migration
     {
         Schema::table('reviews', function (Blueprint $table) {
             $table->unsignedInteger('author_id');
-            $table->foreign('author_id', 'author_fk_2341068')->references('id')->on('users');
+            $table->foreign('author_id', 'author_fk_2342119')->references('id')->on('users');
             $table->unsignedInteger('document_id')->nullable();
-            $table->foreign('document_id', 'document_fk_2341069')->references('id')->on('documents');
+            $table->foreign('document_id', 'document_fk_2342120')->references('id')->on('documents');
         });
     }
 }

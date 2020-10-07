@@ -57,14 +57,6 @@
                             {{ $unit->head->name ?? '' }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.unit.fields.parent') }}
-                        </th>
-                        <td>
-                            {{ $unit->parent->name ?? '' }}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -81,11 +73,6 @@
         {{ trans('global.relatedData') }}
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#parent_units" role="tab" data-toggle="tab">
-                {{ trans('cruds.unit.title') }}
-            </a>
-        </li>
         <li class="nav-item">
             <a class="nav-link" href="#unit_premises" role="tab" data-toggle="tab">
                 {{ trans('cruds.premise.title') }}
@@ -108,9 +95,6 @@
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="parent_units">
-            @includeIf('admin.units.relationships.parentUnits', ['units' => $unit->parentUnits])
-        </div>
         <div class="tab-pane" role="tabpanel" id="unit_premises">
             @includeIf('admin.units.relationships.unitPremises', ['premises' => $unit->unitPremises])
         </div>

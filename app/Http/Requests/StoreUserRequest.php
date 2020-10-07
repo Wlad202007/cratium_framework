@@ -29,6 +29,10 @@ class StoreUserRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'phone'           => [
+                'string',
+                'nullable',
+            ],
             'email'           => [
                 'required',
                 'unique:users',
@@ -42,10 +46,6 @@ class StoreUserRequest extends FormRequest
             'roles'           => [
                 'required',
                 'array',
-            ],
-            'phone'           => [
-                'string',
-                'nullable',
             ],
         ];
     }

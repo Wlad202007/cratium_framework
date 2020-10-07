@@ -10,9 +10,9 @@ class AddRelationshipFieldsToAnswersTable extends Migration
     {
         Schema::table('answers', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_fk_2341037')->references('id')->on('users');
+            $table->foreign('user_id', 'user_fk_2342086')->references('id')->on('users');
             $table->unsignedInteger('variant_id');
-            $table->foreign('variant_id', 'variant_fk_2341038')->references('id')->on('variants');
+            $table->foreign('variant_id', 'variant_fk_2342087')->references('id')->on('variants');
         });
     }
 }

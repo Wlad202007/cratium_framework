@@ -10,11 +10,9 @@ class AddRelationshipFieldsToPremisesTable extends Migration
     {
         Schema::table('premises', function (Blueprint $table) {
             $table->unsignedInteger('unit_id');
-            $table->foreign('unit_id', 'unit_fk_2340913')->references('id')->on('units');
+            $table->foreign('unit_id', 'unit_fk_2342018')->references('id')->on('units');
             $table->unsignedInteger('team_id')->nullable();
-            $table->foreign('team_id', 'team_fk_2340917')->references('id')->on('teams');
-            $table->unsignedInteger('parent_id')->nullable();
-            $table->foreign('parent_id', 'parent_fk_2340919')->references('id')->on('premises');
+            $table->foreign('team_id', 'team_fk_2342022')->references('id')->on('teams');
         });
     }
 }

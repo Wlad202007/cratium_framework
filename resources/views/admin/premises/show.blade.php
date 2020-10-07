@@ -71,14 +71,6 @@
                             {{ $premise->gps }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.premise.fields.parent') }}
-                        </th>
-                        <td>
-                            {{ $premise->parent->name ?? '' }}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -90,22 +82,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#parent_premises" role="tab" data-toggle="tab">
-                {{ trans('cruds.premise.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="parent_premises">
-            @includeIf('admin.premises.relationships.parentPremises', ['premises' => $premise->parentPremises])
-        </div>
-    </div>
-</div>
+
 
 @endsection

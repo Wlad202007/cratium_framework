@@ -51,14 +51,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.group.fields.parent') }}
-                        </th>
-                        <td>
-                            {{ $group->parent->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.group.fields.description') }}
                         </th>
                         <td>
@@ -90,11 +82,6 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="#parent_groups" role="tab" data-toggle="tab">
-                {{ trans('cruds.group.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#groups_courses" role="tab" data-toggle="tab">
                 {{ trans('cruds.course.title') }}
             </a>
@@ -106,9 +93,6 @@
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="parent_groups">
-            @includeIf('admin.groups.relationships.parentGroups', ['groups' => $group->parentGroups])
-        </div>
         <div class="tab-pane" role="tabpanel" id="groups_courses">
             @includeIf('admin.groups.relationships.groupsCourses', ['courses' => $group->groupsCourses])
         </div>

@@ -12,7 +12,7 @@ use App\Models\Unit;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
 class GroupsController extends Controller
@@ -23,7 +23,7 @@ class GroupsController extends Controller
     {
         abort_if(Gate::denies('group_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $groups = Group::get();
+        $groups = Group::all();
 
         $units = Unit::get();
 
@@ -40,11 +40,9 @@ class GroupsController extends Controller
 
         $members = User::all()->pluck('name', 'id');
 
-        $parents = Group::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $heads = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.groups.create', compact('units', 'members', 'parents', 'heads'));
+        return view('admin.groups.create', compact('units', 'members', 'heads'));
     }
 
     public function store(StoreGroupRequest $request)
@@ -67,13 +65,11 @@ class GroupsController extends Controller
 
         $members = User::all()->pluck('name', 'id');
 
-        $parents = Group::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $heads = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $group->load('unit', 'members', 'parent', 'head');
+        $group->load('unit', 'members', 'head');
 
-        return view('admin.groups.edit', compact('units', 'members', 'parents', 'heads', 'group'));
+        return view('admin.groups.edit', compact('units', 'members', 'heads', 'group'));
     }
 
     public function update(UpdateGroupRequest $request, Group $group)
@@ -88,7 +84,7 @@ class GroupsController extends Controller
     {
         abort_if(Gate::denies('group_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $group->load('unit', 'members', 'parent', 'head', 'parentGroups', 'groupsCourses', 'groupsFolders');
+        $group->load('unit', 'members', 'head', 'groupsCourses', 'groupsFolders');
 
         return view('admin.groups.show', compact('group'));
     }

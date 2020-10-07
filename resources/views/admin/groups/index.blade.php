@@ -35,9 +35,6 @@
                             {{ trans('cruds.group.fields.members') }}
                         </th>
                         <th>
-                            {{ trans('cruds.group.fields.parent') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.group.fields.head') }}
                         </th>
                         <th>
@@ -65,14 +62,6 @@
                             <select class="search">
                                 <option value>{{ trans('global.all') }}</option>
                                 @foreach($users as $key => $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($groups as $key => $item)
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
@@ -108,9 +97,6 @@
                                 @foreach($group->members as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $group->parent->name ?? '' }}
                             </td>
                             <td>
                                 {{ $group->head->name ?? '' }}

@@ -10,9 +10,9 @@ class CreateFolderUserPivotTable extends Migration
     {
         Schema::create('folder_user', function (Blueprint $table) {
             $table->unsignedInteger('folder_id');
-            $table->foreign('folder_id', 'folder_id_fk_2341362')->references('id')->on('folders')->onDelete('cascade');
+            $table->foreign('folder_id', 'folder_id_fk_2342096')->references('id')->on('folders')->onDelete('cascade');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_id_fk_2341362')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id', 'user_id_fk_2342096')->references('id')->on('users')->onDelete('cascade');
         });
     }
 }
