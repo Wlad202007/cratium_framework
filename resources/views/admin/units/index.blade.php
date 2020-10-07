@@ -41,6 +41,9 @@
                         {{ trans('cruds.unit.fields.head') }}
                     </th>
                     <th>
+                        {{ trans('cruds.unit.fields.parent') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -73,6 +76,14 @@
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($users as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($units as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -137,6 +148,7 @@
 { data: 'type', name: 'type' },
 { data: 'managers', name: 'managers.name' },
 { data: 'head_name', name: 'head.name' },
+{ data: 'parent_name', name: 'parent.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

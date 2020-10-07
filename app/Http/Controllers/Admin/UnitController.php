@@ -23,7 +23,7 @@ class UnitController extends Controller
         abort_if(Gate::denies('unit_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Unit::with(['managers', 'head'])->select(sprintf('%s.*', (new Unit)->table));
+            $query = Unit::with(['managers', 'head', 'parent'])->select(sprintf('%s.*', (new Unit)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -66,15 +66,20 @@ class UnitController extends Controller
                 return $row->head ? $row->head->name : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'managers', 'head']);
+            $table->addColumn('parent_name', function ($row) {
+                return $row->parent ? $row->parent->name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'managers', 'head', 'parent']);
 
             return $table->make(true);
         }
 
         $users = User::get();
         $users = User::get();
+        $units = Unit::get();
 
-        return view('admin.units.index', compact('users', 'users'));
+        return view('admin.units.index', compact('users', 'users', 'units'));
     }
 
     public function create()
@@ -85,7 +90,9 @@ class UnitController extends Controller
 
         $heads = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.units.create', compact('managers', 'heads'));
+        $parents = Unit::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.units.create', compact('managers', 'heads', 'parents'));
     }
 
     public function store(StoreUnitRequest $request)
@@ -104,9 +111,11 @@ class UnitController extends Controller
 
         $heads = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $unit->load('managers', 'head');
+        $parents = Unit::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.units.edit', compact('managers', 'heads', 'unit'));
+        $unit->load('managers', 'head', 'parent');
+
+        return view('admin.units.edit', compact('managers', 'heads', 'parents', 'unit'));
     }
 
     public function update(UpdateUnitRequest $request, Unit $unit)
@@ -121,7 +130,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $unit->load('managers', 'head', 'unitPremises', 'unitGroups', 'unitDocuments', 'unitsTemplates');
+        $unit->load('managers', 'head', 'parent', 'unitPremises', 'unitGroups', 'unitDocuments', 'parentUnits', 'unitsTemplates');
 
         return view('admin.units.show', compact('unit'));
     }

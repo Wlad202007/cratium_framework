@@ -26,6 +26,7 @@ class Unit extends Model
         'name',
         'type',
         'head_id',
+        'parent_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -58,6 +59,11 @@ class Unit extends Model
         return $this->hasMany(Document::class, 'unit_id', 'id');
     }
 
+    public function parentUnits()
+    {
+        return $this->hasMany(Unit::class, 'parent_id', 'id');
+    }
+
     public function unitsTemplates()
     {
         return $this->belongsToMany(Template::class);
@@ -71,5 +77,10 @@ class Unit extends Model
     public function head()
     {
         return $this->belongsTo(User::class, 'head_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Unit::class, 'parent_id');
     }
 }
