@@ -15,6 +15,7 @@ class CreateQuestionsTable extends Migration
             $table->float('score', 6, 1)->nullable();
             $table->string('status');
             $table->string('type');
+            $table->string('priority');
             $table->timestamps();
             $table->softDeletes();
         });

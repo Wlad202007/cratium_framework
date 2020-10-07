@@ -37,6 +37,7 @@ class Premise extends Model
         'address',
         'gps',
         'created_at',
+        'parent_id',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -47,9 +48,19 @@ class Premise extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function parentPremises()
+    {
+        return $this->hasMany(Premise::class, 'parent_id', 'id');
+    }
+
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Premise::class, 'parent_id');
     }
 
     public function team()

@@ -13,6 +13,8 @@ class AddRelationshipFieldsToActivitiesTable extends Migration
             $table->foreign('course_id', 'course_fk_2342063')->references('id')->on('courses');
             $table->unsignedInteger('moderator_id');
             $table->foreign('moderator_id', 'moderator_fk_2342065')->references('id')->on('users');
+            $table->unsignedInteger('author_id');
+            $table->foreign('author_id', 'author_fk_2349304')->references('id')->on('users');
         });
     }
 }

@@ -63,6 +63,16 @@ class StoreActivityRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'priority'      => [
+                'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'author_id'     => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

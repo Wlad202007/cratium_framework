@@ -13,6 +13,8 @@ class AddRelationshipFieldsToScoresTable extends Migration
             $table->foreign('author_id', 'author_fk_2342145')->references('id')->on('users');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id', 'user_fk_2342146')->references('id')->on('users');
+            $table->unsignedInteger('activity_id');
+            $table->foreign('activity_id', 'activity_fk_2349202')->references('id')->on('activities');
         });
     }
 }

@@ -20,7 +20,7 @@ class ActivityApiController extends Controller
     {
         abort_if(Gate::denies('activity_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ActivityResource(Activity::with(['course', 'checkins', 'moderator'])->get());
+        return new ActivityResource(Activity::with(['course', 'checkins', 'moderator', 'author'])->get());
     }
 
     public function store(StoreActivityRequest $request)
@@ -45,7 +45,7 @@ class ActivityApiController extends Controller
     {
         abort_if(Gate::denies('activity_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ActivityResource($activity->load(['course', 'checkins', 'moderator']));
+        return new ActivityResource($activity->load(['course', 'checkins', 'moderator', 'author']));
     }
 
     public function update(UpdateActivityRequest $request, Activity $activity)

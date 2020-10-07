@@ -44,12 +44,6 @@
                             {{ trans('cruds.activity.fields.time_end') }}
                         </th>
                         <th>
-                            {{ trans('cruds.activity.fields.test_per_page') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.activity.fields.time_per_test') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.activity.fields.mode') }}
                         </th>
                         <th>
@@ -78,12 +72,6 @@
                                     <option value="{{ $item }}">{{ $item }}</option>
                                 @endforeach
                             </select>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -151,12 +139,6 @@
                             </td>
                             <td>
                                 {{ $activity->time_end ?? '' }}
-                            </td>
-                            <td>
-                                {{ $activity->test_per_page ?? '' }}
-                            </td>
-                            <td>
-                                {{ $activity->time_per_test ?? '' }}
                             </td>
                             <td>
                                 {{ App\Models\Activity::MODE_SELECT[$activity->mode] ?? '' }}

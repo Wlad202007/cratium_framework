@@ -37,12 +37,6 @@
                             {{ trans('cruds.premise.fields.type') }}
                         </th>
                         <th>
-                            {{ trans('cruds.premise.fields.address') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.premise.fields.gps') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.premise.fields.parent') }}
                         </th>
                         <th>
@@ -70,12 +64,6 @@
                             </td>
                             <td>
                                 {{ App\Models\Premise::TYPE_SELECT[$premise->type] ?? '' }}
-                            </td>
-                            <td>
-                                {{ $premise->address ?? '' }}
-                            </td>
-                            <td>
-                                {{ $premise->gps ?? '' }}
                             </td>
                             <td>
                                 {{ $premise->parent->name ?? '' }}

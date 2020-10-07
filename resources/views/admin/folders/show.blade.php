@@ -67,6 +67,14 @@
                             {{ $folder->admin->name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.folder.fields.parent') }}
+                        </th>
+                        <td>
+                            {{ $folder->parent->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -84,12 +92,20 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
+            <a class="nav-link" href="#parent_folders" role="tab" data-toggle="tab">
+                {{ trans('cruds.folder.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#folders_documents" role="tab" data-toggle="tab">
                 {{ trans('cruds.document.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="parent_folders">
+            @includeIf('admin.folders.relationships.parentFolders', ['folders' => $folder->parentFolders])
+        </div>
         <div class="tab-pane" role="tabpanel" id="folders_documents">
             @includeIf('admin.folders.relationships.foldersDocuments', ['documents' => $folder->foldersDocuments])
         </div>

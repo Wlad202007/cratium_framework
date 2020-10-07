@@ -16,11 +16,13 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'approved'           => 1,
                 'verified'           => 1,
-                'verified_at'        => '2020-10-07 06:10:03',
+                'verified_at'        => '2020-10-07 19:11:51',
                 'academic_status'    => '',
                 'position'           => '',
                 'phone'              => '',
                 'verification_token' => '',
+                'last_name'          => '',
+                'middle_name'        => '',
             ],
         ];
 

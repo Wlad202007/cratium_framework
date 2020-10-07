@@ -31,9 +31,6 @@
                             {{ trans('cruds.answer.fields.variant') }}
                         </th>
                         <th>
-                            {{ trans('cruds.answer.fields.media') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -52,13 +49,6 @@
                             </td>
                             <td>
                                 {{ $answer->variant->type ?? '' }}
-                            </td>
-                            <td>
-                                @if($answer->media)
-                                    <a href="{{ $answer->media->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endif
                             </td>
                             <td>
                                 @can('answer_show')

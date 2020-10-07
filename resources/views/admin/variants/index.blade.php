@@ -32,14 +32,25 @@
                         {{ trans('cruds.variant.fields.question') }}
                     </th>
                     <th>
-                        {{ trans('cruds.variant.fields.image') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.variant.fields.type') }}
-                    </th>
-                    <th>
                         &nbsp;
                     </th>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($questions as $key => $item)
+                                <option value="{{ $item->question }}">{{ $item->question }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                    </td>
                 </tr>
             </thead>
         </table>
@@ -95,8 +106,6 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'question_question', name: 'question.question' },
-{ data: 'image', name: 'image', sortable: false, searchable: false },
-{ data: 'type', name: 'type' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
@@ -108,7 +117,14 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+  $('.datatable thead').on('input', '.search', function () {
+      let strict = $(this).attr('strict') || false
+      let value = strict && this.value ? "^" + this.value + "$" : this.value
+      table
+        .column($(this).parent().index())
+        .search(value, strict)
+        .draw()
+  });
 });
 
 </script>

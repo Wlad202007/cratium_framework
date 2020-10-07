@@ -40,7 +40,9 @@ class ActivityController extends Controller
 
         $moderators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.activities.create', compact('courses', 'moderators'));
+        $authors = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.activities.create', compact('courses', 'moderators', 'authors'));
     }
 
     public function store(StoreActivityRequest $request)
@@ -72,9 +74,11 @@ class ActivityController extends Controller
 
         $moderators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $activity->load('course', 'checkins', 'moderator');
+        $authors = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.activities.edit', compact('courses', 'checkins', 'moderators', 'activity'));
+        $activity->load('course', 'checkins', 'moderator', 'author');
+
+        return view('admin.activities.edit', compact('courses', 'checkins', 'moderators', 'authors', 'activity'));
     }
 
     public function update(UpdateActivityRequest $request, Activity $activity)
@@ -121,7 +125,7 @@ class ActivityController extends Controller
     {
         abort_if(Gate::denies('activity_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $activity->load('course', 'checkins', 'moderator', 'activityQuestions');
+        $activity->load('course', 'checkins', 'moderator', 'author', 'activityQuestions', 'activityScores');
 
         return view('admin.activities.show', compact('activity'));
     }

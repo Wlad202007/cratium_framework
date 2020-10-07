@@ -35,9 +35,6 @@
                         {{ trans('cruds.answer.fields.variant') }}
                     </th>
                     <th>
-                        {{ trans('cruds.answer.fields.media') }}
-                    </th>
-                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -62,8 +59,6 @@
                                 <option value="{{ $item->type }}">{{ $item->type }}</option>
                             @endforeach
                         </select>
-                    </td>
-                    <td>
                     </td>
                     <td>
                     </td>
@@ -123,7 +118,6 @@
 { data: 'id', name: 'id' },
 { data: 'user_name', name: 'user.name' },
 { data: 'variant_type', name: 'variant.type' },
-{ data: 'media', name: 'media', sortable: false, searchable: false },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

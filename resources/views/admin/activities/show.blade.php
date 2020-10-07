@@ -153,6 +153,22 @@
                             {{ $activity->moderator->name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.activity.fields.priority') }}
+                        </th>
+                        <td>
+                            {{ $activity->priority }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.activity.fields.author') }}
+                        </th>
+                        <td>
+                            {{ $activity->author->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -174,10 +190,18 @@
                 {{ trans('cruds.question.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#activity_scores" role="tab" data-toggle="tab">
+                {{ trans('cruds.score.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="activity_questions">
             @includeIf('admin.activities.relationships.activityQuestions', ['questions' => $activity->activityQuestions])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="activity_scores">
+            @includeIf('admin.activities.relationships.activityScores', ['scores' => $activity->activityScores])
         </div>
     </div>
 </div>

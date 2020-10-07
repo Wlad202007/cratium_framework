@@ -18,15 +18,6 @@ class Folder extends Model
         'deleted_at',
     ];
 
-    protected $fillable = [
-        'name',
-        'color',
-        'admin_id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
     const COLOR_SELECT = [
         'default' => 'Default',
         'success' => 'Success',
@@ -34,9 +25,24 @@ class Folder extends Model
         'danger'  => 'Danger',
     ];
 
+    protected $fillable = [
+        'name',
+        'color',
+        'admin_id',
+        'parent_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function parentFolders()
+    {
+        return $this->hasMany(Folder::class, 'parent_id', 'id');
     }
 
     public function foldersDocuments()
@@ -57,5 +63,10 @@ class Folder extends Model
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Folder::class, 'parent_id');
     }
 }
