@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -11,7 +12,7 @@ use \DateTimeInterface;
 
 class Question extends Model implements HasMedia
 {
-    use SoftDeletes, HasMediaTrait;
+    use SoftDeletes, HasMediaTrait, Auditable;
 
     public $table = 'questions';
 
@@ -43,6 +44,7 @@ class Question extends Model implements HasMedia
         'activity_id',
         'status',
         'created_at',
+        'priority',
         'type',
         'updated_at',
         'deleted_at',

@@ -159,6 +159,44 @@
                 <span class="help-block">{{ trans('cruds.activity.fields.moderator_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="priority">{{ trans('cruds.activity.fields.priority') }}</label>
+                <input class="form-control {{ $errors->has('priority') ? 'is-invalid' : '' }}" type="number" name="priority" id="priority" value="{{ old('priority', '1') }}" step="1" required>
+                @if($errors->has('priority'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('priority') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.activity.fields.priority_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="author_id">{{ trans('cruds.activity.fields.author') }}</label>
+                <select class="form-control select2 {{ $errors->has('author') ? 'is-invalid' : '' }}" name="author_id" id="author_id" required>
+                    @foreach($authors as $id => $author)
+                        <option value="{{ $id }}" {{ old('author_id') == $id ? 'selected' : '' }}>{{ $author }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('author'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('author') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.activity.fields.author_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="premise_id">{{ trans('cruds.activity.fields.premise') }}</label>
+                <select class="form-control select2 {{ $errors->has('premise') ? 'is-invalid' : '' }}" name="premise_id" id="premise_id">
+                    @foreach($premises as $id => $premise)
+                        <option value="{{ $id }}" {{ old('premise_id') == $id ? 'selected' : '' }}>{{ $premise }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('premise'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('premise') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.activity.fields.premise_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -17,7 +17,7 @@ class PremiseApiController extends Controller
     {
         abort_if(Gate::denies('premise_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PremiseResource(Premise::with(['unit', 'team'])->get());
+        return new PremiseResource(Premise::with(['unit', 'parent', 'team'])->get());
     }
 
     public function store(StorePremiseRequest $request)
@@ -33,7 +33,7 @@ class PremiseApiController extends Controller
     {
         abort_if(Gate::denies('premise_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PremiseResource($premise->load(['unit', 'team']));
+        return new PremiseResource($premise->load(['unit', 'parent', 'team']));
     }
 
     public function update(UpdatePremiseRequest $request, Premise $premise)

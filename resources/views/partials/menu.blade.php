@@ -85,7 +85,7 @@
         @can('setting_access')
             <li class="c-sidebar-nav-dropdown">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+                    <i class="fa-fw fas fa-graduation-cap c-sidebar-nav-icon">
 
                     </i>
                     {{ trans('cruds.setting.title') }}
@@ -94,7 +94,7 @@
                     @can('unit_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.units.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/units") || request()->is("admin/units/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-cube c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.unit.title') }}
@@ -104,7 +104,7 @@
                     @can('premise_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.premises.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/premises") || request()->is("admin/premises/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-hotel c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-hospital-alt c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.premise.title') }}
@@ -141,6 +141,28 @@
                             </a>
                         </li>
                     @endcan
+                    @can('publication_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.publications.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/publications") || request()->is("admin/publications/*") ? "active" : "" }}">
+                                <i class="fa-fw fas fa-bookmark c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.publication.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('examination_access')
+            <li class="c-sidebar-nav-dropdown">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-award c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.examination.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
                     @can('question_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.questions.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/questions") || request()->is("admin/questions/*") ? "active" : "" }}">
@@ -154,7 +176,7 @@
                     @can('variant_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.variants.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/variants") || request()->is("admin/variants/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-arrows-alt c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-list c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.variant.title') }}
@@ -196,7 +218,7 @@
                     @can('document_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.documents.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/documents") || request()->is("admin/documents/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-align-left c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-file-signature c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.document.title') }}
@@ -216,7 +238,7 @@
                     @can('folder_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.folders.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/folders") || request()->is("admin/folders/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-angle-double-up c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-folder-open c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.folder.title') }}
@@ -236,10 +258,42 @@
                     @can('template_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.templates.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/templates") || request()->is("admin/templates/*") ? "active" : "" }}">
-                                <i class="fa-fw fas fa-align-left c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-text-height c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.template.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('bill_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.bills.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/bills") || request()->is("admin/bills/*") ? "active" : "" }}">
+                                <i class="fa-fw fas fa-dollar-sign c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.bill.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('system_access')
+            <li class="c-sidebar-nav-dropdown">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.system.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('config_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.configs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/configs") || request()->is("admin/configs/*") ? "active" : "" }}">
+                                <i class="fa-fw fas fa-grip-horizontal c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.config.title') }}
                             </a>
                         </li>
                     @endcan

@@ -14,6 +14,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('teams', 'TeamApiController');
 
     // Units
+    Route::post('units/media', 'UnitApiController@storeMedia')->name('units.storeMedia');
     Route::apiResource('units', 'UnitApiController');
 
     // Premises
@@ -64,4 +65,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Scores
     Route::apiResource('scores', 'ScoresApiController');
+
+    // Publications
+    Route::post('publications/media', 'PublicationsApiController@storeMedia')->name('publications.storeMedia');
+    Route::apiResource('publications', 'PublicationsApiController');
+
+    // Configs
+    Route::apiResource('configs', 'ConfigsApiController');
+
+    // Bills
+    Route::post('bills/media', 'BillsApiController@storeMedia')->name('bills.storeMedia');
+    Route::apiResource('bills', 'BillsApiController');
 });

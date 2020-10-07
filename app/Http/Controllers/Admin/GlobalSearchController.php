@@ -9,14 +9,15 @@ use Illuminate\Support\Str;
 class GlobalSearchController extends Controller
 {
     private $models = [
-        'User'     => 'cruds.user.title',
-        'Unit'     => 'cruds.unit.title',
-        'Premise'  => 'cruds.premise.title',
-        'Group'    => 'cruds.group.title',
-        'Course'   => 'cruds.course.title',
-        'Activity' => 'cruds.activity.title',
-        'Document' => 'cruds.document.title',
-        'Template' => 'cruds.template.title',
+        'User'        => 'cruds.user.title',
+        'Unit'        => 'cruds.unit.title',
+        'Premise'     => 'cruds.premise.title',
+        'Group'       => 'cruds.group.title',
+        'Course'      => 'cruds.course.title',
+        'Activity'    => 'cruds.activity.title',
+        'Document'    => 'cruds.document.title',
+        'Template'    => 'cruds.template.title',
+        'Publication' => 'cruds.publication.title',
     ];
 
     public function search(Request $request)

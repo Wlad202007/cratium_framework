@@ -37,6 +37,9 @@
                             {{ trans('cruds.group.fields.head') }}
                         </th>
                         <th>
+                            {{ trans('cruds.group.fields.parent') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -63,6 +66,9 @@
                             </td>
                             <td>
                                 {{ $group->head->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $group->parent->name ?? '' }}
                             </td>
                             <td>
                                 @can('group_show')

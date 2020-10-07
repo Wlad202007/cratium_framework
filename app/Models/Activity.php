@@ -61,6 +61,9 @@ class Activity extends Model implements HasMedia
         'description',
         'course_id',
         'moderator_id',
+        'priority',
+        'author_id',
+        'premise_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -80,6 +83,11 @@ class Activity extends Model implements HasMedia
     public function activityQuestions()
     {
         return $this->hasMany(Question::class, 'activity_id', 'id');
+    }
+
+    public function activityScores()
+    {
+        return $this->hasMany(Score::class, 'activity_id', 'id');
     }
 
     public function getTimeStartAttribute($value)
@@ -125,5 +133,15 @@ class Activity extends Model implements HasMedia
     public function moderator()
     {
         return $this->belongsTo(User::class, 'moderator_id');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function premise()
+    {
+        return $this->belongsTo(Premise::class, 'premise_id');
     }
 }

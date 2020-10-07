@@ -44,12 +44,6 @@
                             {{ trans('cruds.activity.fields.time_end') }}
                         </th>
                         <th>
-                            {{ trans('cruds.activity.fields.test_per_page') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.activity.fields.time_per_test') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.activity.fields.mode') }}
                         </th>
                         <th>
@@ -57,6 +51,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.activity.fields.moderator') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.activity.fields.premise') }}
                         </th>
                         <th>
                             &nbsp;
@@ -78,12 +75,6 @@
                                     <option value="{{ $item }}">{{ $item }}</option>
                                 @endforeach
                             </select>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -122,6 +113,14 @@
                             </select>
                         </td>
                         <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($premises as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
                         </td>
                     </tr>
                 </thead>
@@ -153,12 +152,6 @@
                                 {{ $activity->time_end ?? '' }}
                             </td>
                             <td>
-                                {{ $activity->test_per_page ?? '' }}
-                            </td>
-                            <td>
-                                {{ $activity->time_per_test ?? '' }}
-                            </td>
-                            <td>
                                 {{ App\Models\Activity::MODE_SELECT[$activity->mode] ?? '' }}
                             </td>
                             <td>
@@ -166,6 +159,9 @@
                             </td>
                             <td>
                                 {{ $activity->moderator->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $activity->premise->name ?? '' }}
                             </td>
                             <td>
                                 @can('activity_show')

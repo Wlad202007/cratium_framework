@@ -52,19 +52,6 @@ class QuestionsController extends Controller
             $table->editColumn('question', function ($row) {
                 return $row->question ? $row->question : "";
             });
-            $table->editColumn('files', function ($row) {
-                if (!$row->files) {
-                    return '';
-                }
-
-                $links = [];
-
-                foreach ($row->files as $media) {
-                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>';
-                }
-
-                return implode(', ', $links);
-            });
             $table->editColumn('score', function ($row) {
                 return $row->score ? $row->score : "";
             });
@@ -75,16 +62,21 @@ class QuestionsController extends Controller
             $table->editColumn('status', function ($row) {
                 return $row->status ? Question::STATUS_SELECT[$row->status] : '';
             });
+            $table->editColumn('priority', function ($row) {
+                return $row->priority ? $row->priority : "";
+            });
             $table->editColumn('type', function ($row) {
                 return $row->type ? Question::TYPE_SELECT[$row->type] : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'files', 'activity']);
+            $table->rawColumns(['actions', 'placeholder', 'activity']);
 
             return $table->make(true);
         }
 
-        return view('admin.questions.index');
+        $activities = Activity::get();
+
+        return view('admin.questions.index', compact('activities'));
     }
 
     public function create()

@@ -28,16 +28,13 @@
                         {{ trans('cruds.folder.fields.name') }}
                     </th>
                     <th>
-                        {{ trans('cruds.folder.fields.color') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.folder.fields.users') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.folder.fields.groups') }}
                     </th>
                     <th>
                         {{ trans('cruds.folder.fields.admin') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.folder.fields.parent') }}
                     </th>
                     <th>
                         &nbsp;
@@ -53,22 +50,6 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <select class="search" strict="true">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach(App\Models\Folder::COLOR_SELECT as $key => $item)
-                                <option value="{{ $key }}">{{ $item }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($groups as $key => $item)
@@ -80,6 +61,14 @@
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($users as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($folders as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -141,10 +130,9 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
-{ data: 'color', name: 'color' },
-{ data: 'users', name: 'users.name' },
 { data: 'groups', name: 'groups.name' },
 { data: 'admin_name', name: 'admin.name' },
+{ data: 'parent_name', name: 'parent.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

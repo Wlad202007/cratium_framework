@@ -28,12 +28,6 @@
                             {{ trans('cruds.variant.fields.question') }}
                         </th>
                         <th>
-                            {{ trans('cruds.variant.fields.image') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.variant.fields.type') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -49,16 +43,6 @@
                             </td>
                             <td>
                                 {{ $variant->question->question ?? '' }}
-                            </td>
-                            <td>
-                                @if($variant->image)
-                                    <a href="{{ $variant->image->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $variant->image->getUrl('thumb') }}">
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                {{ App\Models\Variant::TYPE_SELECT[$variant->type] ?? '' }}
                             </td>
                             <td>
                                 @can('variant_show')

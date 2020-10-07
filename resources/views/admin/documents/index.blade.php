@@ -38,9 +38,6 @@
                         {{ trans('cruds.document.fields.title') }}
                     </th>
                     <th>
-                        {{ trans('cruds.document.fields.scan') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.document.fields.unit') }}
                     </th>
                     <th>
@@ -51,12 +48,6 @@
                     </th>
                     <th>
                         {{ trans('cruds.document.fields.status') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.document.fields.shares') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.document.fields.folders') }}
                     </th>
                     <th>
                         &nbsp;
@@ -76,8 +67,6 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
                     </td>
                     <td>
                         <select class="search">
@@ -108,22 +97,6 @@
                             <option value>{{ trans('global.all') }}</option>
                             @foreach(App\Models\Document::STATUS_SELECT as $key => $item)
                                 <option value="{{ $key }}">{{ $item }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($folders as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -186,13 +159,10 @@
 { data: 'int_number', name: 'int_number' },
 { data: 'ext_number', name: 'ext_number' },
 { data: 'title', name: 'title' },
-{ data: 'scan', name: 'scan', sortable: false, searchable: false },
 { data: 'unit_name', name: 'unit.name' },
 { data: 'author_name', name: 'author.name' },
 { data: 'type', name: 'type' },
 { data: 'status', name: 'status' },
-{ data: 'shares', name: 'shares.name' },
-{ data: 'folders', name: 'folders.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

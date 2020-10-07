@@ -20,6 +20,7 @@ class CreateActivitiesTable extends Migration
             $table->integer('time_per_test')->nullable();
             $table->string('mode');
             $table->longText('description')->nullable();
+            $table->integer('priority');
             $table->timestamps();
             $table->softDeletes();
         });

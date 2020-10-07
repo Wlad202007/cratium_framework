@@ -119,6 +119,14 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.document.fields.cost') }}
+                        </th>
+                        <td>
+                            {{ $document->cost }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

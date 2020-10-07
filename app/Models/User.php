@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\VerifyUserNotification;
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -16,11 +17,12 @@ use \DateTimeInterface;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable, HasApiTokens;
+    use SoftDeletes, Notifiable, HasApiTokens, Auditable;
 
     public $table = 'users';
 
     public static $searchable = [
+        'name',
         'degree',
     ];
 
@@ -45,22 +47,24 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'last_name',
+        'middle_name',
         'degree',
         'academic_status',
+        'position',
         'approved',
         'verified',
         'verified_at',
         'verification_token',
-        'position',
         'phone',
         'email',
         'email_verified_at',
         'password',
+        'team_id',
         'remember_token',
         'created_at',
         'updated_at',
         'deleted_at',
-        'team_id',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -152,6 +156,26 @@ class User extends Authenticatable
     public function userScores()
     {
         return $this->hasMany(Score::class, 'user_id', 'id');
+    }
+
+    public function authorPublications()
+    {
+        return $this->hasMany(Publication::class, 'author_id', 'id');
+    }
+
+    public function authorActivities()
+    {
+        return $this->hasMany(Activity::class, 'author_id', 'id');
+    }
+
+    public function userBills()
+    {
+        return $this->hasMany(Bill::class, 'user_id', 'id');
+    }
+
+    public function authorBills()
+    {
+        return $this->hasMany(Bill::class, 'author_id', 'id');
     }
 
     public function managersUnits()

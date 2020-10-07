@@ -38,16 +38,7 @@
                             {{ trans('cruds.course.fields.hours') }}
                         </th>
                         <th>
-                            {{ trans('cruds.course.fields.credits') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.course.fields.groups') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.course.fields.video') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.course.fields.thumbnail') }}
                         </th>
                         <th>
                             &nbsp;
@@ -82,20 +73,12 @@
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
                             <select class="search">
                                 <option value>{{ trans('global.all') }}</option>
                                 @foreach($groups as $key => $item)
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
                         </td>
                         <td>
                         </td>
@@ -125,22 +108,9 @@
                                 {{ $course->hours ?? '' }}
                             </td>
                             <td>
-                                {{ $course->credits ?? '' }}
-                            </td>
-                            <td>
                                 @foreach($course->groups as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $course->video ?? '' }}
-                            </td>
-                            <td>
-                                @if($course->thumbnail)
-                                    <a href="{{ $course->thumbnail->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $course->thumbnail->getUrl('thumb') }}">
-                                    </a>
-                                @endif
                             </td>
                             <td>
                                 @can('course_show')

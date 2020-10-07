@@ -21,6 +21,26 @@
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="last_name">{{ trans('cruds.user.fields.last_name') }}</label>
+                <input class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}">
+                @if($errors->has('last_name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('last_name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.last_name_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="middle_name">{{ trans('cruds.user.fields.middle_name') }}</label>
+                <input class="form-control {{ $errors->has('middle_name') ? 'is-invalid' : '' }}" type="text" name="middle_name" id="middle_name" value="{{ old('middle_name', $user->middle_name) }}">
+                @if($errors->has('middle_name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('middle_name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.middle_name_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label>{{ trans('cruds.user.fields.degree') }}</label>
                 <select class="form-control {{ $errors->has('degree') ? 'is-invalid' : '' }}" name="degree" id="degree">
                     <option value disabled {{ old('degree', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
@@ -46,6 +66,16 @@
                 <span class="help-block">{{ trans('cruds.user.fields.academic_status_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="position">{{ trans('cruds.user.fields.position') }}</label>
+                <input class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" type="text" name="position" id="position" value="{{ old('position', $user->position) }}">
+                @if($errors->has('position'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('position') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.position_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
                     <input type="hidden" name="approved" value="0">
                     <input class="form-check-input" type="checkbox" name="approved" id="approved" value="1" {{ $user->approved || old('approved', 0) === 1 ? 'checked' : '' }}>
@@ -57,16 +87,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="position">{{ trans('cruds.user.fields.position') }}</label>
-                <input class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" type="text" name="position" id="position" value="{{ old('position', $user->position) }}">
-                @if($errors->has('position'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('position') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.position_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="phone">{{ trans('cruds.user.fields.phone') }}</label>
