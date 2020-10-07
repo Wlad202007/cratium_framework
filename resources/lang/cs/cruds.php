@@ -149,6 +149,8 @@ return [
             'deleted_at_helper' => ' ',
             'head'              => 'Head',
             'head_helper'       => ' ',
+            'parent'            => 'Parent',
+            'parent_helper'     => ' ',
         ],
     ],
     'premise'        => [

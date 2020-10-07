@@ -57,6 +57,14 @@
                             {{ $unit->head->name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.unit.fields.parent') }}
+                        </th>
+                        <td>
+                            {{ $unit->parent->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -89,6 +97,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#parent_units" role="tab" data-toggle="tab">
+                {{ trans('cruds.unit.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#units_templates" role="tab" data-toggle="tab">
                 {{ trans('cruds.template.title') }}
             </a>
@@ -103,6 +116,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="unit_documents">
             @includeIf('admin.units.relationships.unitDocuments', ['documents' => $unit->unitDocuments])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="parent_units">
+            @includeIf('admin.units.relationships.parentUnits', ['units' => $unit->parentUnits])
         </div>
         <div class="tab-pane" role="tabpanel" id="units_templates">
             @includeIf('admin.units.relationships.unitsTemplates', ['templates' => $unit->unitsTemplates])
