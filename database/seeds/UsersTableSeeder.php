@@ -14,10 +14,13 @@ class UsersTableSeeder extends Seeder
                 'email'              => 'admin@admin.com',
                 'password'           => bcrypt('password'),
                 'remember_token'     => null,
-                'verification_token' => '',
+                'approved'           => 1,
+                'verified'           => 1,
+                'verified_at'        => '2020-10-07 06:10:03',
                 'academic_status'    => '',
                 'position'           => '',
                 'phone'              => '',
+                'verification_token' => '',
             ],
         ];
 
