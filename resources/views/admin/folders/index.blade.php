@@ -37,9 +37,6 @@
                         {{ trans('cruds.folder.fields.groups') }}
                     </th>
                     <th>
-                        {{ trans('cruds.folder.fields.parent') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.folder.fields.admin') }}
                     </th>
                     <th>
@@ -75,14 +72,6 @@
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($groups as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($folders as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -155,7 +144,6 @@
 { data: 'color', name: 'color' },
 { data: 'users', name: 'users.name' },
 { data: 'groups', name: 'groups.name' },
-{ data: 'parent_name', name: 'parent.name' },
 { data: 'admin_name', name: 'admin.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],

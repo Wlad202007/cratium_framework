@@ -10,9 +10,9 @@ class CreateFolderGroupPivotTable extends Migration
     {
         Schema::create('folder_group', function (Blueprint $table) {
             $table->unsignedInteger('folder_id');
-            $table->foreign('folder_id', 'folder_id_fk_2341363')->references('id')->on('folders')->onDelete('cascade');
+            $table->foreign('folder_id', 'folder_id_fk_2342097')->references('id')->on('folders')->onDelete('cascade');
             $table->unsignedInteger('group_id');
-            $table->foreign('group_id', 'group_id_fk_2341363')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('group_id', 'group_id_fk_2342097')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 }

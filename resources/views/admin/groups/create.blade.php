@@ -52,20 +52,6 @@
                 <span class="help-block">{{ trans('cruds.group.fields.members_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="parent_id">{{ trans('cruds.group.fields.parent') }}</label>
-                <select class="form-control select2 {{ $errors->has('parent') ? 'is-invalid' : '' }}" name="parent_id" id="parent_id">
-                    @foreach($parents as $id => $parent)
-                        <option value="{{ $id }}" {{ old('parent_id') == $id ? 'selected' : '' }}>{{ $parent }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('parent'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('parent') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.group.fields.parent_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="description">{{ trans('cruds.group.fields.description') }}</label>
                 <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description') !!}</textarea>
                 @if($errors->has('description'))

@@ -43,9 +43,6 @@
                             {{ trans('cruds.premise.fields.gps') }}
                         </th>
                         <th>
-                            {{ trans('cruds.premise.fields.parent') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -76,9 +73,6 @@
                             </td>
                             <td>
                                 {{ $premise->gps ?? '' }}
-                            </td>
-                            <td>
-                                {{ $premise->parent->name ?? '' }}
                             </td>
                             <td>
                                 @can('premise_show')

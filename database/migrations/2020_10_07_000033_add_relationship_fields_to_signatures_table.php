@@ -10,9 +10,9 @@ class AddRelationshipFieldsToSignaturesTable extends Migration
     {
         Schema::table('signatures', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_fk_2341377')->references('id')->on('users');
+            $table->foreign('user_id', 'user_fk_2342126')->references('id')->on('users');
             $table->unsignedInteger('document_id');
-            $table->foreign('document_id', 'document_fk_2341378')->references('id')->on('documents');
+            $table->foreign('document_id', 'document_fk_2342127')->references('id')->on('documents');
         });
     }
 }

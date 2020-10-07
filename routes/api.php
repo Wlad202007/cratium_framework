@@ -19,13 +19,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Premises
     Route::apiResource('premises', 'PremiseApiController');
 
-    // Courses
-    Route::post('courses/media', 'CourseApiController@storeMedia')->name('courses.storeMedia');
-    Route::apiResource('courses', 'CourseApiController');
-
     // Groups
     Route::post('groups/media', 'GroupsApiController@storeMedia')->name('groups.storeMedia');
     Route::apiResource('groups', 'GroupsApiController');
+
+    // Courses
+    Route::post('courses/media', 'CourseApiController@storeMedia')->name('courses.storeMedia');
+    Route::apiResource('courses', 'CourseApiController');
 
     // Activities
     Route::post('activities/media', 'ActivityApiController@storeMedia')->name('activities.storeMedia');
@@ -43,6 +43,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('answers/media', 'AnswersApiController@storeMedia')->name('answers.storeMedia');
     Route::apiResource('answers', 'AnswersApiController');
 
+    // Folders
+    Route::apiResource('folders', 'FoldersApiController');
+
     // Documents
     Route::post('documents/media', 'DocumentsApiController@storeMedia')->name('documents.storeMedia');
     Route::apiResource('documents', 'DocumentsApiController');
@@ -50,9 +53,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Reviews
     Route::post('reviews/media', 'ReviewsApiController@storeMedia')->name('reviews.storeMedia');
     Route::apiResource('reviews', 'ReviewsApiController');
-
-    // Folders
-    Route::apiResource('folders', 'FoldersApiController');
 
     // Signatures
     Route::post('signatures/media', 'SignatureApiController@storeMedia')->name('signatures.storeMedia');

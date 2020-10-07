@@ -10,9 +10,9 @@ class AddRelationshipFieldsToDocumentsTable extends Migration
     {
         Schema::table('documents', function (Blueprint $table) {
             $table->unsignedInteger('unit_id');
-            $table->foreign('unit_id', 'unit_fk_2341056')->references('id')->on('units');
+            $table->foreign('unit_id', 'unit_fk_2342106')->references('id')->on('units');
             $table->unsignedInteger('author_id');
-            $table->foreign('author_id', 'author_fk_2341057')->references('id')->on('users');
+            $table->foreign('author_id', 'author_fk_2342107')->references('id')->on('users');
         });
     }
 }

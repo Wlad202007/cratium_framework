@@ -24,7 +24,7 @@ class PremiseController extends Controller
         abort_if(Gate::denies('premise_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Premise::with(['unit', 'parent', 'team'])->select(sprintf('%s.*', (new Premise)->table));
+            $query = Premise::with(['unit', 'team'])->select(sprintf('%s.*', (new Premise)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -67,20 +67,16 @@ class PremiseController extends Controller
             $table->editColumn('gps', function ($row) {
                 return $row->gps ? $row->gps : "";
             });
-            $table->addColumn('parent_name', function ($row) {
-                return $row->parent ? $row->parent->name : '';
-            });
 
-            $table->rawColumns(['actions', 'placeholder', 'unit', 'parent']);
+            $table->rawColumns(['actions', 'placeholder', 'unit']);
 
             return $table->make(true);
         }
 
-        $units    = Unit::get();
-        $premises = Premise::get();
-        $teams    = Team::get();
+        $units = Unit::get();
+        $teams = Team::get();
 
-        return view('admin.premises.index', compact('units', 'premises', 'teams'));
+        return view('admin.premises.index', compact('units', 'teams'));
     }
 
     public function create()
@@ -89,9 +85,7 @@ class PremiseController extends Controller
 
         $units = Unit::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $parents = Premise::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.premises.create', compact('units', 'parents'));
+        return view('admin.premises.create', compact('units'));
     }
 
     public function store(StorePremiseRequest $request)
@@ -107,11 +101,9 @@ class PremiseController extends Controller
 
         $units = Unit::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $parents = Premise::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $premise->load('unit', 'team');
 
-        $premise->load('unit', 'parent', 'team');
-
-        return view('admin.premises.edit', compact('units', 'parents', 'premise'));
+        return view('admin.premises.edit', compact('units', 'premise'));
     }
 
     public function update(UpdatePremiseRequest $request, Premise $premise)
@@ -125,7 +117,7 @@ class PremiseController extends Controller
     {
         abort_if(Gate::denies('premise_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $premise->load('unit', 'parent', 'team', 'parentPremises');
+        $premise->load('unit', 'team');
 
         return view('admin.premises.show', compact('premise'));
     }

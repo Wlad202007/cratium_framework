@@ -10,9 +10,9 @@ class CreateDocumentFolderPivotTable extends Migration
     {
         Schema::create('document_folder', function (Blueprint $table) {
             $table->unsignedInteger('document_id');
-            $table->foreign('document_id', 'document_id_fk_2341386')->references('id')->on('documents')->onDelete('cascade');
+            $table->foreign('document_id', 'document_id_fk_2342116')->references('id')->on('documents')->onDelete('cascade');
             $table->unsignedInteger('folder_id');
-            $table->foreign('folder_id', 'folder_id_fk_2341386')->references('id')->on('folders')->onDelete('cascade');
+            $table->foreign('folder_id', 'folder_id_fk_2342116')->references('id')->on('folders')->onDelete('cascade');
         });
     }
 }

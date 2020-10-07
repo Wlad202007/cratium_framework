@@ -21,7 +21,7 @@ class FoldersController extends Controller
         abort_if(Gate::denies('folder_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Folder::with(['users', 'groups', 'parent', 'admin'])->select(sprintf('%s.*', (new Folder)->table));
+            $query = Folder::with(['users', 'groups', 'admin'])->select(sprintf('%s.*', (new Folder)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -69,25 +69,20 @@ class FoldersController extends Controller
 
                 return implode(' ', $labels);
             });
-            $table->addColumn('parent_name', function ($row) {
-                return $row->parent ? $row->parent->name : '';
-            });
-
             $table->addColumn('admin_name', function ($row) {
                 return $row->admin ? $row->admin->name : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'users', 'groups', 'parent', 'admin']);
+            $table->rawColumns(['actions', 'placeholder', 'users', 'groups', 'admin']);
 
             return $table->make(true);
         }
 
-        $users   = User::get();
-        $groups  = Group::get();
-        $folders = Folder::get();
-        $users   = User::get();
+        $users  = User::get();
+        $groups = Group::get();
+        $users  = User::get();
 
-        return view('admin.folders.index', compact('users', 'groups', 'folders', 'users'));
+        return view('admin.folders.index', compact('users', 'groups', 'users'));
     }
 
     public function create()
@@ -98,11 +93,9 @@ class FoldersController extends Controller
 
         $groups = Group::all()->pluck('name', 'id');
 
-        $parents = Folder::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $admins = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.folders.create', compact('users', 'groups', 'parents', 'admins'));
+        return view('admin.folders.create', compact('users', 'groups', 'admins'));
     }
 
     public function store(StoreFolderRequest $request)
@@ -122,13 +115,11 @@ class FoldersController extends Controller
 
         $groups = Group::all()->pluck('name', 'id');
 
-        $parents = Folder::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $admins = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $folder->load('users', 'groups', 'parent', 'admin');
+        $folder->load('users', 'groups', 'admin');
 
-        return view('admin.folders.edit', compact('users', 'groups', 'parents', 'admins', 'folder'));
+        return view('admin.folders.edit', compact('users', 'groups', 'admins', 'folder'));
     }
 
     public function update(UpdateFolderRequest $request, Folder $folder)
@@ -144,7 +135,7 @@ class FoldersController extends Controller
     {
         abort_if(Gate::denies('folder_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $folder->load('users', 'groups', 'parent', 'admin', 'parentFolders', 'foldersDocuments');
+        $folder->load('users', 'groups', 'admin', 'foldersDocuments');
 
         return view('admin.folders.show', compact('folder'));
     }

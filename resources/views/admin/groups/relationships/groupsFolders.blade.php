@@ -37,9 +37,6 @@
                             {{ trans('cruds.folder.fields.groups') }}
                         </th>
                         <th>
-                            {{ trans('cruds.folder.fields.parent') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.folder.fields.admin') }}
                         </th>
                         <th>
@@ -71,9 +68,6 @@
                                 @foreach($folder->groups as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $folder->parent->name ?? '' }}
                             </td>
                             <td>
                                 {{ $folder->admin->name ?? '' }}

@@ -47,9 +47,6 @@
                         {{ trans('cruds.premise.fields.gps') }}
                     </th>
                     <th>
-                        {{ trans('cruds.premise.fields.parent') }}
-                    </th>
-                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -86,14 +83,6 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($premises as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
                     </td>
                     <td>
                     </td>
@@ -157,7 +146,6 @@
 { data: 'type', name: 'type' },
 { data: 'address', name: 'address' },
 { data: 'gps', name: 'gps' },
-{ data: 'parent_name', name: 'parent.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

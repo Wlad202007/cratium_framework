@@ -10,9 +10,9 @@ class CreateCourseUserPivotTable extends Migration
     {
         Schema::create('course_user', function (Blueprint $table) {
             $table->unsignedInteger('course_id');
-            $table->foreign('course_id', 'course_id_fk_2340924')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('course_id', 'course_id_fk_2342037')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_id_fk_2340924')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id', 'user_id_fk_2342037')->references('id')->on('users')->onDelete('cascade');
         });
     }
 }

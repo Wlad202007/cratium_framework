@@ -37,9 +37,6 @@
                             {{ trans('cruds.unit.fields.head') }}
                         </th>
                         <th>
-                            {{ trans('cruds.unit.fields.parent') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -66,9 +63,6 @@
                             </td>
                             <td>
                                 {{ $unit->head->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $unit->parent->name ?? '' }}
                             </td>
                             <td>
                                 @can('unit_show')

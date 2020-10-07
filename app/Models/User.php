@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +16,7 @@ use \DateTimeInterface;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable, HasApiTokens, HasFactory;
+    use SoftDeletes, Notifiable, HasApiTokens;
 
     public $table = 'users';
 
@@ -49,6 +48,7 @@ class User extends Authenticatable
         'degree',
         'academic_status',
         'position',
+        'phone',
         'email',
         'email_verified_at',
         'password',
@@ -58,7 +58,6 @@ class User extends Authenticatable
         'verification_token',
         'remember_token',
         'created_at',
-        'phone',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -78,29 +77,10 @@ class User extends Authenticatable
     {
         parent::__construct($attributes);
         self::created(function (User $user) {
-            if (auth()->check()) {
-                $user->verified    = 1;
-                $user->verified_at = Carbon::now()->format(config('panel.date_format') . ' ' . config('panel.time_format'));
-                $user->save();
-            } elseif (!$user->verification_token) {
-                $token     = Str::random(64);
-                $usedToken = User::where('verification_token', $token)->first();
+            $registrationRole = config('panel.registration_default_role');
 
-                while ($usedToken) {
-                    $token     = Str::random(64);
-                    $usedToken = User::where('verification_token', $token)->first();
-                }
-
-                $user->verification_token = $token;
-                $user->save();
-
-                $registrationRole = config('panel.registration_default_role');
-
-                if (!$user->roles()->get()->contains($registrationRole)) {
-                    $user->roles()->attach($registrationRole);
-                }
-
-                $user->notify(new VerifyUserNotification($user));
+            if (!$user->roles()->get()->contains($registrationRole)) {
+                $user->roles()->attach($registrationRole);
             }
         });
     }
@@ -125,6 +105,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class, 'user_id', 'id');
     }
 
+    public function adminFolders()
+    {
+        return $this->hasMany(Folder::class, 'admin_id', 'id');
+    }
+
     public function authorDocuments()
     {
         return $this->hasMany(Document::class, 'author_id', 'id');
@@ -138,11 +123,6 @@ class User extends Authenticatable
     public function userSignatures()
     {
         return $this->hasMany(Signature::class, 'user_id', 'id');
-    }
-
-    public function adminFolders()
-    {
-        return $this->hasMany(Folder::class, 'admin_id', 'id');
     }
 
     public function authorScores()
@@ -160,14 +140,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Unit::class);
     }
 
-    public function authorsCourses()
-    {
-        return $this->belongsToMany(Course::class);
-    }
-
     public function membersGroups()
     {
         return $this->belongsToMany(Group::class);
+    }
+
+    public function authorsCourses()
+    {
+        return $this->belongsToMany(Course::class);
     }
 
     public function checkinActivities()
@@ -175,14 +155,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Activity::class);
     }
 
-    public function sharesDocuments()
-    {
-        return $this->belongsToMany(Document::class);
-    }
-
     public function usersFolders()
     {
         return $this->belongsToMany(Folder::class);
+    }
+
+    public function sharesDocuments()
+    {
+        return $this->belongsToMany(Document::class);
     }
 
     public function getEmailVerifiedAtAttribute($value)

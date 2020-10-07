@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Cratium',
+    'site_title' => 'Cratium UA',
 ];

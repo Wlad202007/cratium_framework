@@ -10,7 +10,7 @@ class AddRelationshipFieldsToVariantsTable extends Migration
     {
         Schema::table('variants', function (Blueprint $table) {
             $table->unsignedInteger('question_id')->nullable();
-            $table->foreign('question_id', 'question_fk_2341031')->references('id')->on('questions');
+            $table->foreign('question_id', 'question_fk_2342081')->references('id')->on('questions');
         });
     }
 }

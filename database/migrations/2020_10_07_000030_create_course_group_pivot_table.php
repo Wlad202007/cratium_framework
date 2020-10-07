@@ -10,9 +10,9 @@ class CreateCourseGroupPivotTable extends Migration
     {
         Schema::create('course_group', function (Blueprint $table) {
             $table->unsignedInteger('course_id');
-            $table->foreign('course_id', 'course_id_fk_2340939')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('course_id', 'course_id_fk_2342044')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedInteger('group_id');
-            $table->foreign('group_id', 'group_id_fk_2340939')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('group_id', 'group_id_fk_2342044')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 }

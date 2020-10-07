@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 use \DateTimeInterface;
 
 class Group extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use SoftDeletes, HasMediaTrait;
 
     public $table = 'groups';
 
@@ -29,7 +28,6 @@ class Group extends Model implements HasMedia
     protected $fillable = [
         'name',
         'unit_id',
-        'parent_id',
         'description',
         'head_id',
         'created_at',
@@ -42,15 +40,10 @@ class Group extends Model implements HasMedia
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
-    }
-
-    public function parentGroups()
-    {
-        return $this->hasMany(Group::class, 'parent_id', 'id');
     }
 
     public function groupsCourses()
@@ -71,11 +64,6 @@ class Group extends Model implements HasMedia
     public function members()
     {
         return $this->belongsToMany(User::class);
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(Group::class, 'parent_id');
     }
 
     public function head()
