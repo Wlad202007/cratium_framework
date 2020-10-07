@@ -21,9 +21,19 @@ class User extends Authenticatable
 
     public $table = 'users';
 
+    public static $searchable = [
+        'degree',
+    ];
+
     protected $hidden = [
         'remember_token',
         'password',
+    ];
+
+    const DEGREE_SELECT = [
+        'aspirant' => 'Aspirant',
+        'profesor' => 'Professor',
+        'student'  => 'Student',
     ];
 
     protected $dates = [
@@ -36,6 +46,9 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'degree',
+        'academic_status',
+        'position',
         'email',
         'email_verified_at',
         'password',
@@ -45,6 +58,7 @@ class User extends Authenticatable
         'verification_token',
         'remember_token',
         'created_at',
+        'phone',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -111,6 +125,36 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class, 'user_id', 'id');
     }
 
+    public function authorDocuments()
+    {
+        return $this->hasMany(Document::class, 'author_id', 'id');
+    }
+
+    public function authorReviews()
+    {
+        return $this->hasMany(Review::class, 'author_id', 'id');
+    }
+
+    public function userSignatures()
+    {
+        return $this->hasMany(Signature::class, 'user_id', 'id');
+    }
+
+    public function adminFolders()
+    {
+        return $this->hasMany(Folder::class, 'admin_id', 'id');
+    }
+
+    public function authorScores()
+    {
+        return $this->hasMany(Score::class, 'author_id', 'id');
+    }
+
+    public function userScores()
+    {
+        return $this->hasMany(Score::class, 'user_id', 'id');
+    }
+
     public function managersUnits()
     {
         return $this->belongsToMany(Unit::class);
@@ -129,6 +173,16 @@ class User extends Authenticatable
     public function checkinActivities()
     {
         return $this->belongsToMany(Activity::class);
+    }
+
+    public function sharesDocuments()
+    {
+        return $this->belongsToMany(Document::class);
+    }
+
+    public function usersFolders()
+    {
+        return $this->belongsToMany(Folder::class);
     }
 
     public function getEmailVerifiedAtAttribute($value)

@@ -21,7 +21,11 @@ class UsersController extends Controller
 
         $users = User::all();
 
-        return view('admin.users.index', compact('users'));
+        $roles = Role::get();
+
+        $teams = Team::get();
+
+        return view('admin.users.index', compact('users', 'roles', 'teams'));
     }
 
     public function create()
@@ -68,7 +72,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'team', 'headUnits', 'headGroups', 'moderatorActivities', 'userAnswers', 'managersUnits', 'authorsCourses', 'membersGroups', 'checkinActivities');
+        $user->load('roles', 'team', 'headUnits', 'headGroups', 'moderatorActivities', 'userAnswers', 'authorDocuments', 'authorReviews', 'userSignatures', 'adminFolders', 'authorScores', 'userScores', 'managersUnits', 'authorsCourses', 'membersGroups', 'checkinActivities', 'sharesDocuments', 'usersFolders');
 
         return view('admin.users.show', compact('user'));
     }

@@ -96,6 +96,16 @@
                 {{ trans('cruds.group.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#unit_documents" role="tab" data-toggle="tab">
+                {{ trans('cruds.document.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#units_templates" role="tab" data-toggle="tab">
+                {{ trans('cruds.template.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="parent_units">
@@ -106,6 +116,12 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="unit_groups">
             @includeIf('admin.units.relationships.unitGroups', ['groups' => $unit->unitGroups])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="unit_documents">
+            @includeIf('admin.units.relationships.unitDocuments', ['documents' => $unit->unitDocuments])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="units_templates">
+            @includeIf('admin.units.relationships.unitsTemplates', ['templates' => $unit->unitsTemplates])
         </div>
     </div>
 </div>

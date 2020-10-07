@@ -85,6 +85,45 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('answers/process-csv-import', 'AnswersController@processCsvImport')->name('answers.processCsvImport');
     Route::resource('answers', 'AnswersController');
 
+    // Documents
+    Route::delete('documents/destroy', 'DocumentsController@massDestroy')->name('documents.massDestroy');
+    Route::post('documents/media', 'DocumentsController@storeMedia')->name('documents.storeMedia');
+    Route::post('documents/ckmedia', 'DocumentsController@storeCKEditorImages')->name('documents.storeCKEditorImages');
+    Route::post('documents/parse-csv-import', 'DocumentsController@parseCsvImport')->name('documents.parseCsvImport');
+    Route::post('documents/process-csv-import', 'DocumentsController@processCsvImport')->name('documents.processCsvImport');
+    Route::resource('documents', 'DocumentsController');
+
+    // Reviews
+    Route::delete('reviews/destroy', 'ReviewsController@massDestroy')->name('reviews.massDestroy');
+    Route::post('reviews/media', 'ReviewsController@storeMedia')->name('reviews.storeMedia');
+    Route::post('reviews/ckmedia', 'ReviewsController@storeCKEditorImages')->name('reviews.storeCKEditorImages');
+    Route::resource('reviews', 'ReviewsController');
+
+    // Folders
+    Route::delete('folders/destroy', 'FoldersController@massDestroy')->name('folders.massDestroy');
+    Route::resource('folders', 'FoldersController');
+
+    // Signatures
+    Route::delete('signatures/destroy', 'SignatureController@massDestroy')->name('signatures.massDestroy');
+    Route::post('signatures/media', 'SignatureController@storeMedia')->name('signatures.storeMedia');
+    Route::post('signatures/ckmedia', 'SignatureController@storeCKEditorImages')->name('signatures.storeCKEditorImages');
+    Route::resource('signatures', 'SignatureController');
+
+    // Templates
+    Route::delete('templates/destroy', 'TemplateController@massDestroy')->name('templates.massDestroy');
+    Route::post('templates/media', 'TemplateController@storeMedia')->name('templates.storeMedia');
+    Route::post('templates/ckmedia', 'TemplateController@storeCKEditorImages')->name('templates.storeCKEditorImages');
+    Route::post('templates/parse-csv-import', 'TemplateController@parseCsvImport')->name('templates.parseCsvImport');
+    Route::post('templates/process-csv-import', 'TemplateController@processCsvImport')->name('templates.processCsvImport');
+    Route::resource('templates', 'TemplateController');
+
+    // Scores
+    Route::delete('scores/destroy', 'ScoresController@massDestroy')->name('scores.massDestroy');
+    Route::resource('scores', 'ScoresController');
+
+    // Audit Logs
+    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');

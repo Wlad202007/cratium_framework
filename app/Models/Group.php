@@ -58,6 +58,11 @@ class Group extends Model implements HasMedia
         return $this->belongsToMany(Course::class);
     }
 
+    public function groupsFolders()
+    {
+        return $this->belongsToMany(Folder::class);
+    }
+
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');

@@ -260,6 +260,138 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 63,
+                'title' => 'documentation_access',
+            ],
+            [
+                'id'    => 64,
+                'title' => 'document_create',
+            ],
+            [
+                'id'    => 65,
+                'title' => 'document_edit',
+            ],
+            [
+                'id'    => 66,
+                'title' => 'document_show',
+            ],
+            [
+                'id'    => 67,
+                'title' => 'document_delete',
+            ],
+            [
+                'id'    => 68,
+                'title' => 'document_access',
+            ],
+            [
+                'id'    => 69,
+                'title' => 'review_create',
+            ],
+            [
+                'id'    => 70,
+                'title' => 'review_edit',
+            ],
+            [
+                'id'    => 71,
+                'title' => 'review_show',
+            ],
+            [
+                'id'    => 72,
+                'title' => 'review_delete',
+            ],
+            [
+                'id'    => 73,
+                'title' => 'review_access',
+            ],
+            [
+                'id'    => 74,
+                'title' => 'folder_create',
+            ],
+            [
+                'id'    => 75,
+                'title' => 'folder_edit',
+            ],
+            [
+                'id'    => 76,
+                'title' => 'folder_show',
+            ],
+            [
+                'id'    => 77,
+                'title' => 'folder_delete',
+            ],
+            [
+                'id'    => 78,
+                'title' => 'folder_access',
+            ],
+            [
+                'id'    => 79,
+                'title' => 'signature_create',
+            ],
+            [
+                'id'    => 80,
+                'title' => 'signature_edit',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'signature_show',
+            ],
+            [
+                'id'    => 82,
+                'title' => 'signature_delete',
+            ],
+            [
+                'id'    => 83,
+                'title' => 'signature_access',
+            ],
+            [
+                'id'    => 84,
+                'title' => 'template_create',
+            ],
+            [
+                'id'    => 85,
+                'title' => 'template_edit',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'template_show',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'template_delete',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'template_access',
+            ],
+            [
+                'id'    => 89,
+                'title' => 'score_create',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'score_edit',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'score_show',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'score_delete',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'score_access',
+            ],
+            [
+                'id'    => 94,
+                'title' => 'audit_log_show',
+            ],
+            [
+                'id'    => 95,
+                'title' => 'audit_log_access',
+            ],
+            [
+                'id'    => 96,
                 'title' => 'profile_password_edit',
             ],
         ];

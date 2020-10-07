@@ -88,7 +88,7 @@ class GroupsController extends Controller
     {
         abort_if(Gate::denies('group_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $group->load('unit', 'members', 'parent', 'head', 'parentGroups', 'groupsCourses');
+        $group->load('unit', 'members', 'parent', 'head', 'parentGroups', 'groupsCourses', 'groupsFolders');
 
         return view('admin.groups.show', compact('group'));
     }
