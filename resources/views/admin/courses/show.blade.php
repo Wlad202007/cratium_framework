@@ -103,6 +103,14 @@
                             @endif
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.price') }}
+                        </th>
+                        <td>
+                            {{ $course->price }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -124,10 +132,18 @@
                 {{ trans('cruds.activity.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#cources_skills" role="tab" data-toggle="tab">
+                {{ trans('cruds.skill.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="course_activities">
             @includeIf('admin.courses.relationships.courseActivities', ['activities' => $course->courseActivities])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="cources_skills">
+            @includeIf('admin.courses.relationships.courcesSkills', ['skills' => $course->courcesSkills])
         </div>
     </div>
 </div>

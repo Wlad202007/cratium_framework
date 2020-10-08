@@ -42,6 +42,7 @@ class Course extends Model implements HasMedia
         'hours',
         'credits',
         'video',
+        'price',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -61,6 +62,11 @@ class Course extends Model implements HasMedia
     public function courseActivities()
     {
         return $this->hasMany(Activity::class, 'course_id', 'id');
+    }
+
+    public function courcesSkills()
+    {
+        return $this->belongsToMany(Skill::class);
     }
 
     public function authors()

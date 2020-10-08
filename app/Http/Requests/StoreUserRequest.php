@@ -55,6 +55,12 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'array',
             ],
+            'skills.*'        => [
+                'integer',
+            ],
+            'skills'          => [
+                'array',
+            ],
         ];
     }
 }

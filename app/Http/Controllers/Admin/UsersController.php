@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
+use App\Models\Skill;
 use App\Models\Team;
 use App\Models\User;
 use Gate;
@@ -24,7 +25,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles', 'team'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles', 'team', 'skills'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -81,10 +82,11 @@ class UsersController extends Controller
             return $table->make(true);
         }
 
-        $roles = Role::get();
-        $teams = Team::get();
+        $roles  = Role::get();
+        $teams  = Team::get();
+        $skills = Skill::get();
 
-        return view('admin.users.index', compact('roles', 'teams'));
+        return view('admin.users.index', compact('roles', 'teams', 'skills'));
     }
 
     public function create()
@@ -95,13 +97,16 @@ class UsersController extends Controller
 
         $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.create', compact('roles', 'teams'));
+        $skills = Skill::all()->pluck('name', 'id');
+
+        return view('admin.users.create', compact('roles', 'teams', 'skills'));
     }
 
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->skills()->sync($request->input('skills', []));
 
         return redirect()->route('admin.users.index');
     }
@@ -114,15 +119,18 @@ class UsersController extends Controller
 
         $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $user->load('roles', 'team');
+        $skills = Skill::all()->pluck('name', 'id');
 
-        return view('admin.users.edit', compact('roles', 'teams', 'user'));
+        $user->load('roles', 'team', 'skills');
+
+        return view('admin.users.edit', compact('roles', 'teams', 'skills', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->skills()->sync($request->input('skills', []));
 
         return redirect()->route('admin.users.index');
     }
@@ -131,7 +139,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'team', 'headUnits', 'headGroups', 'moderatorActivities', 'userAnswers', 'adminFolders', 'authorDocuments', 'authorReviews', 'userSignatures', 'authorScores', 'userScores', 'authorPublications', 'authorActivities', 'userBills', 'authorBills', 'managersUnits', 'membersGroups', 'authorsCourses', 'checkinActivities', 'usersFolders', 'sharesDocuments');
+        $user->load('roles', 'team', 'skills', 'headUnits', 'headGroups', 'moderatorActivities', 'userAnswers', 'adminFolders', 'authorDocuments', 'authorReviews', 'userSignatures', 'authorScores', 'userScores', 'authorPublications', 'authorActivities', 'userBills', 'authorBills', 'contactStudentGroups', 'managersUnits', 'membersGroups', 'authorsCourses', 'checkinActivities', 'usersFolders', 'sharesDocuments');
 
         return view('admin.users.show', compact('user'));
     }

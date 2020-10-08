@@ -91,6 +91,20 @@
                 <span class="help-block">{{ trans('cruds.group.fields.parent_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="contact_student_id">{{ trans('cruds.group.fields.contact_student') }}</label>
+                <select class="form-control select2 {{ $errors->has('contact_student') ? 'is-invalid' : '' }}" name="contact_student_id" id="contact_student_id">
+                    @foreach($contact_students as $id => $contact_student)
+                        <option value="{{ $id }}" {{ (old('contact_student_id') ? old('contact_student_id') : $group->contact_student->id ?? '') == $id ? 'selected' : '' }}>{{ $contact_student }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('contact_student'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('contact_student') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.group.fields.contact_student_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
