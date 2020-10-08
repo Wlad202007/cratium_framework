@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->float('hours', 6, 1)->nullable();
             $table->float('credits', 15, 2)->nullable();
             $table->string('video')->nullable();
+            $table->decimal('price', 15, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

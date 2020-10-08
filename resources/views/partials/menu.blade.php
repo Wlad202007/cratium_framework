@@ -124,7 +124,7 @@
                     @can('group_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.groups.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/groups") || request()->is("admin/groups/*") ? "active" : "" }}">
-                                <i class="fa-fw fab fa-connectdevelop c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-users c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.group.title') }}
@@ -148,6 +148,16 @@
 
                                 </i>
                                 {{ trans('cruds.publication.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('skill_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.skills.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/skills") || request()->is("admin/skills/*") ? "active" : "" }}">
+                                <i class="fa-fw fas fa-gem c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.skill.title') }}
                             </a>
                         </li>
                     @endcan

@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'approved'           => 1,
                 'verified'           => 1,
-                'verified_at'        => '2020-10-07 19:11:51',
+                'verified_at'        => '2020-10-07 21:16:53',
                 'academic_status'    => '',
                 'position'           => '',
                 'phone'              => '',

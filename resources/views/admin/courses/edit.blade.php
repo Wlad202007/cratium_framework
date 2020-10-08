@@ -133,6 +133,16 @@
                 <span class="help-block">{{ trans('cruds.course.fields.thumbnail_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="price">{{ trans('cruds.course.fields.price') }}</label>
+                <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $course->price) }}" step="0.01">
+                @if($errors->has('price'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('price') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.course.fields.price_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

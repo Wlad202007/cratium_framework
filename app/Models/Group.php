@@ -31,6 +31,7 @@ class Group extends Model implements HasMedia
         'description',
         'head_id',
         'parent_id',
+        'contact_student_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -80,5 +81,10 @@ class Group extends Model implements HasMedia
     public function parent()
     {
         return $this->belongsTo(Group::class, 'parent_id');
+    }
+
+    public function contact_student()
+    {
+        return $this->belongsTo(User::class, 'contact_student_id');
     }
 }

@@ -15,6 +15,8 @@ class AddRelationshipFieldsToGroupsTable extends Migration
             $table->foreign('head_id', 'head_fk_2342032')->references('id')->on('users');
             $table->unsignedInteger('parent_id')->nullable();
             $table->foreign('parent_id', 'parent_fk_2343743')->references('id')->on('groups');
+            $table->unsignedInteger('contact_student_id')->nullable();
+            $table->foreign('contact_student_id', 'contact_student_fk_2350948')->references('id')->on('users');
         });
     }
 }

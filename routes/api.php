@@ -76,4 +76,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Bills
     Route::post('bills/media', 'BillsApiController@storeMedia')->name('bills.storeMedia');
     Route::apiResource('bills', 'BillsApiController');
+
+    // Skills
+    Route::apiResource('skills', 'SkillsApiController');
 });

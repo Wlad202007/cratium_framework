@@ -458,6 +458,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 113,
+                'title' => 'skill_create',
+            ],
+            [
+                'id'    => 114,
+                'title' => 'skill_edit',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'skill_show',
+            ],
+            [
+                'id'    => 116,
+                'title' => 'skill_delete',
+            ],
+            [
+                'id'    => 117,
+                'title' => 'skill_access',
+            ],
+            [
+                'id'    => 118,
                 'title' => 'profile_password_edit',
             ],
         ];

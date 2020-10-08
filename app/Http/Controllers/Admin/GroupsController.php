@@ -26,7 +26,7 @@ class GroupsController extends Controller
         abort_if(Gate::denies('group_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Group::with(['unit', 'members', 'head', 'parent'])->select(sprintf('%s.*', (new Group)->table));
+            $query = Group::with(['unit', 'members', 'head', 'parent', 'contact_student'])->select(sprintf('%s.*', (new Group)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -83,8 +83,9 @@ class GroupsController extends Controller
         $users  = User::get();
         $users  = User::get();
         $groups = Group::get();
+        $users  = User::get();
 
-        return view('admin.groups.index', compact('units', 'users', 'users', 'groups'));
+        return view('admin.groups.index', compact('units', 'users', 'users', 'groups', 'users'));
     }
 
     public function create()
@@ -126,9 +127,11 @@ class GroupsController extends Controller
 
         $parents = Group::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $group->load('unit', 'members', 'head', 'parent');
+        $contact_students = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.groups.edit', compact('units', 'members', 'heads', 'parents', 'group'));
+        $group->load('unit', 'members', 'head', 'parent', 'contact_student');
+
+        return view('admin.groups.edit', compact('units', 'members', 'heads', 'parents', 'contact_students', 'group'));
     }
 
     public function update(UpdateGroupRequest $request, Group $group)
@@ -143,7 +146,7 @@ class GroupsController extends Controller
     {
         abort_if(Gate::denies('group_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $group->load('unit', 'members', 'head', 'parent', 'parentGroups', 'groupsCourses', 'groupsFolders');
+        $group->load('unit', 'members', 'head', 'parent', 'contact_student', 'parentGroups', 'groupsCourses', 'groupsFolders');
 
         return view('admin.groups.show', compact('group'));
     }

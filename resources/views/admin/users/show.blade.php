@@ -121,6 +121,16 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.skills') }}
+                        </th>
+                        <td>
+                            @foreach($user->skills as $key => $skills)
+                                <span class="label label-info">{{ $skills->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -208,6 +218,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#contact_student_groups" role="tab" data-toggle="tab">
+                {{ trans('cruds.group.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#managers_units" role="tab" data-toggle="tab">
                 {{ trans('cruds.unit.title') }}
             </a>
@@ -280,6 +295,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="author_bills">
             @includeIf('admin.users.relationships.authorBills', ['bills' => $user->authorBills])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="contact_student_groups">
+            @includeIf('admin.users.relationships.contactStudentGroups', ['groups' => $user->contactStudentGroups])
         </div>
         <div class="tab-pane" role="tabpanel" id="managers_units">
             @includeIf('admin.users.relationships.managersUnits', ['units' => $user->managersUnits])

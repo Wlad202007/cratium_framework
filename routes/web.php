@@ -148,6 +148,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('bills/ckmedia', 'BillsController@storeCKEditorImages')->name('bills.storeCKEditorImages');
     Route::resource('bills', 'BillsController');
 
+    // Skills
+    Route::delete('skills/destroy', 'SkillsController@massDestroy')->name('skills.massDestroy');
+    Route::resource('skills', 'SkillsController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');

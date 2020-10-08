@@ -73,6 +73,14 @@
                             {{ $group->parent->name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.group.fields.contact_student') }}
+                        </th>
+                        <td>
+                            {{ $group->contact_student->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

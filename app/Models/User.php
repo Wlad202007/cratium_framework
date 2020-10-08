@@ -178,6 +178,11 @@ class User extends Authenticatable
         return $this->hasMany(Bill::class, 'author_id', 'id');
     }
 
+    public function contactStudentGroups()
+    {
+        return $this->hasMany(Group::class, 'contact_student_id', 'id');
+    }
+
     public function managersUnits()
     {
         return $this->belongsToMany(Unit::class);
@@ -248,5 +253,10 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
     }
 }
